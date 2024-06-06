@@ -1,24 +1,36 @@
-# เลือก base image ที่มี Node.js ติดตั้งแล้ว
-FROM node:16-alpine
+# Step 1: Choose a base image with Node.js
+FROM node:16-alpine as builder
 
-# ตั้งค่า working directory ใน container
+# Set the working directory in the Docker container
 WORKDIR /app
 
-# คัดลอกไฟล์ package.json และ package-lock.json (หรือ yarn.lock) เข้าไปใน container
-COPY package.json package-lock.json ./
+# Copy package.json and package-lock.json (or yarn.lock)
+COPY package*.json ./
 
-# ติดตั้ง dependencies ของโปรเจกต์ React
+# Install dependencies
 RUN npm install
 
-# คัดลอกทุกไฟล์จากโปรเจกต์ไปยัง container
+# Copy the rest of your app's source code from your host to your image filesystem.
 COPY . .
 
-# ตั้งค่าสภาพแวดล้อมและพอร์ต
-ENV NODE_ENV=production
-EXPOSE 3000
-
-# Build โปรเจกต์ React
+# Build the React application
 RUN npm run build:serve:dev
 
-# ตั้งค่าคำสั่งที่จะรันเมื่อ container เริ่มต้น
-CMD ["npm", "start"]
+# Step 2: Use nginx or another web server to serve the static content
+# For simplicity, we are using serve to serve the build folder
+FROM node:16-alpine
+
+# Install serve to serve the app on container startup
+RUN npm install -g serve
+
+# Copy the build folder from the build stage to the production image
+COPY --from=builder /app/build /app/build
+
+# Set the working directory to the build directory
+WORKDIR /app/build
+
+# Expose port 5000 where serve will run
+EXPOSE 5000
+
+# Command to run the serve module
+CMD ["serve", "-s", "."]
