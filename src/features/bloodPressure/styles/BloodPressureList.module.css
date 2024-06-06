@@ -1,0 +1,14 @@
+.container {
+  width: 100%;
+  max-width:100%;
+}
+.header {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: start;
+  margin-bottom: 2px;
+}
+
+.stepComponent {
+  align-items: center;
+}

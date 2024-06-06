@@ -1,0 +1,243 @@
+{
+  "translation": {
+    "welcome": "Welcome Back!",
+    "header": "Enter your username and password to sign in.",
+    "header_forgot": "Forgot password",
+    "receive": "You will receive an e-mail in maximum 60 seconds",
+    "header_reset": "Reset password",
+    "sub_header_reset": "Password must contain at least 8 characters, including uppercase (A-Z), lowercase (a-z) digit (0-9) and special character (!,#,$,...)",
+    "human_format": {
+      "timespan": "{hh} {hour} {mm} {minute} {ss} {second}"
+    },
+    "background": {
+      "header": "Golden Jubilee Medical Center.",
+      "sub_header": "Faculty of Medicine, Siriraj Hospital, Mahidol University"
+    },
+    "unit": {
+      "seconds": "seconds",
+      "second": "second",
+      "minutes": "minutes",
+      "minute": "minute",
+      "hours": "hours",
+      "hour": "hour",
+      "days": "days",
+      "day": "day",
+      "months": "months",
+      "month": "month",
+      "years": "years",
+      "year": "year",
+      "baht": "Baht",
+      "meters": "meters"
+    },
+    "status": {
+      "entity": "Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "delete": "Delete"
+    },
+    "step": {
+      "step": "Step",
+      "status": "Status",
+      "wait": "waiting",
+      "process": "processing",
+      "finish": "finished"
+    },
+    "common": {
+      "required_field_suffix": " *",
+      "submit": "Save",
+      "clear": "Clear",
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "next": "Next",
+      "filter": "Filter",
+      "import": "Import",
+      "save": "Save",
+      "create": "Create",
+      "edit": "Edit",
+      "or": "or",
+      "download": "Download",
+      "upload": "Upload",
+      "remove": "Remove",
+      "index": "No.",
+      "announce": "Announce"
+    },
+    "action": {
+      "action": "Action",
+      "view": "VIEW",
+      "edit": "EDIT",
+      "delete": "DELETE",
+      "submit": "SUBMIT",
+      "cancel": "CANCEL",
+      "reset_password": "Reset Password"
+    },
+    "dialog": {
+      "confirmation": {
+        "header": "Confirmation",
+        "create": "Are you sure confirm to create this {entity} ?",
+        "edit": "Are you sure confirm to edit this {entity} ?"
+      }
+    },
+    "paginate": {
+      "description": "Showing {min} to {max} of {total} items"
+    },
+    "patient": {
+      "entity": "patient",
+      "header": "Patient",
+      "info": "Patient Information",
+      "label": {
+        "patient_information": "Patient Information",
+        "patient_id": "No.",
+        "hn": "HN.",
+        "email": "E-mail",
+        "full_name": "Full Name",
+        "phone": "Phone Number",
+        "status": "Status",
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "line_name": "Line Name",
+        "level": "Level",
+        "checkState": "Check State",
+        "createBy": "Create By",
+        "createDate": "Create Date",
+        "updateBy": "Update By",
+        "updateDate": "Update Date",
+        "role": "Role",
+        "status_flag": "Status Flag"
+      }
+    },
+    "sign_up": {
+      "entity": "Sign up",
+      "header": "Blood Pressure Monitoring.",
+      "sub_header": "Create your account to sign in.",
+      "sub_header_address": "Create your company information.",
+      "already_account": "Already have an account?",
+      "sign_in": "Sign in",
+      "accept_tc": "I agree the",
+      "tc": "Terms & Condition",
+      "nextBtn": "NEXT",
+      "submitBtn": "SIGN UP",
+      "backBtn": "BACK",
+      "label": {
+        "sign_up": "Sign up"
+      },
+      "input": {
+        "name": "Name",
+        "surName": "Surname",
+        "email": "E-mail",
+        "phoneNo": "Phone No.",
+        "password": "Password"
+      },
+      "status": {
+        "failed": "Register failed",
+        "failed_description": "Because you may already have this account in the system.",
+        "successful": "Register successful. "
+      },
+      "validation": {
+        "please_enter_your_name": "Please enter your name.",
+        "please_enter_your_surname": "Please enter your surname.",
+        "invalid_email": "Invalid email",
+        "please_enter_your_email": "Please enter your email",
+        "password_must_be_at_least_8_characters": "Password must be at least 8 characters",
+        "please_enter_your_password": "Please enter your password",
+        "invalid_phone_no": "Invalid Phone No.",
+        "please_enter_your_phone_no": "Please enter your Phone No."
+      }
+    },
+    "sign_in": {
+      "entity": "Sign in",
+      "header": "Blood Pressure Monitoring.",
+      "label": {
+        "sign_in": "Sign in",
+        "remember_me": "Remember Me",
+        "forgot_password": "Forgot password?"
+      },
+      "placeholders": {
+        "email": "E-mail",
+        "password": "Password",
+        "newPassword": "New password",
+        "confirm_password": "Confirm password"
+      },
+      "status": {
+        "successful": "Login successful. ",
+        "failed": "Login failed!!!",
+        "failed_description": "Because the username and password do not match."
+      },
+      "validate": {
+        "invalid_email": "Invalid email",
+        "please_enter_your_email": "Please enter your email",
+        "password_must_be_at_least_8_characters": "Password must be at least 8 characters",
+        "please_enter_your_password": "Please enter your password"
+      }
+    },
+    "blood_pressure": {
+      "entity": "blood pressure",
+      "header": "Blood Pressure",
+      "edit": "Edit Blood Pressure",
+      "message": {
+        "delete": "Are you sure to delete this record ?"
+      },
+      "label": {
+        "blood_pressure_information": "Blood Pressure Information",
+        "blood_pressure": "Blood Pressure",
+        "blood_pressure_id": "No.",
+        "updateBy": "Update By",
+        "updateDate": "Update Date",
+        "sys": "Systolic",
+        "dia": "Diastolic",
+        "pul": "Pulse",
+        "create": "Create By",
+        "createBy": "Create By : Name",
+        "createByHN": "Create By : HN",
+        "name": "Name",
+        "hn": "HN"
+      }
+    },
+    "change_password": {
+      "header": "Change password",
+      "sub_Header": "Password must contain at least 8 characters, including uppercase (A-Z), lowercase (a-z) digit (0-9) and special character (!,#,$,...)"
+    },
+    "home": {
+      "entity": "home",
+      "header": "Home",
+      "label": {
+        "loading": "Loading ",
+        "card_one": "Overview of the pressure measurement system.",
+        "card_one_date": "As of : ",
+        "card_one_time": "when : ",
+        "card_two": "All users.",
+        "card_three": "User did send.",
+        "card_four": "User did not send.",
+        "card_five": "Risk.",
+        "card_six": "List of users at risk.",
+        "card_seven_one": "Latest",
+        "card_seven_two": "Sender : ",
+        "card_eight": "List of users at not sent."
+      },
+      "placeholders": {}
+    },
+    "user": {
+      "entity": "user",
+      "header": "User",
+      "label": {
+        "profile": "Profile",
+        "language": "Language",
+        "change_password": "Change Password",
+        "sign_out": "Logout"
+      }
+    },
+    "validation": {
+      "invalid_email": "Invalid email",
+      "invalid_phone_no": "Invalid phone number",
+      "required": "This field is required",
+      "password_min_length": "Password must be at least 8 characters",
+      "passwords_must_match": "Passwords must match"
+    },
+    "forgot": {
+      "status": {
+        "successful": "Reset password successful. ",
+        "failed": "Reset password failed.",
+        "failed_description": "Email and number don't match."
+      }
+    }
+  }
+}
