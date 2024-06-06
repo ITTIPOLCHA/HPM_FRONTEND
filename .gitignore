@@ -1,8 +1,3 @@
-# ไฟล์การตั้งค่าสภาพแวดล้อมที่อาจมีข้อมูลลับ
-.env
-.env.local
-.env.*.local
-
 # โฟลเดอร์ node_modules ที่เก็บไลบรารี
 node_modules/
 
@@ -10,27 +5,3 @@ node_modules/
 .DS_Store
 Thumbs.db
 .vscode/
-
-# ไฟล์ที่สร้างโดยระบบบันทึกเวลา
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# ไดเรกทอรี output ที่สร้างโดยสคริปต์ build
-/dist
-/build
-/out
-
-# ไดเรกทอรี coverage ที่มาจากเครื่องมือทดสอบ
-/coverage
-/.nyc_output
-
-# ไฟล์ lock ที่ควรพิจารณาเพิ่มหรือไม่ตามบริบทของโปรเจกต์
-# package-lock.json
-# yarn.lock
-
-# ไฟล์สำหรับการ deploy
-.deploy/
-
-
