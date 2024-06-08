@@ -3,7 +3,7 @@ import { Alert } from "components/elements";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { generateRandomString } from "utils/helper";
 import * as services from "../services/patientApi";
 import { setIsLoading } from "../slices/patientSlice";
@@ -12,11 +12,11 @@ function usePatientEdit() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.patient.isLoading);
-  const userDropDownNameHn = useSelector((state) => state.bloodPressure.userDropDownNameHn);
+  // const userDropDownNameHn = useSelector((state) => state.bloodPressure.userDropDownNameHn);
   const [patient, setPatient] = useState({});
-  const currentId = window.localStorage.getItem("id");
+  // const currentId = window.localStorage.getItem("id");
   const { id } = useParams();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const getPatient = useCallback(
     async () => {

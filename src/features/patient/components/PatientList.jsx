@@ -1,4 +1,4 @@
-import { FilterOutlined, PlusOutlined } from "@ant-design/icons";
+import { FilterOutlined } from "@ant-design/icons";
 import { Row, Space } from "antd";
 import { Button, CardContainer } from "components/elements";
 import { MainLayout } from "components/layouts";

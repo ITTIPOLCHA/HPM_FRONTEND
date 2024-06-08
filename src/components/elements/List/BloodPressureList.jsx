@@ -18,13 +18,13 @@ const BloodPressureList = ({ height = "", data = [], totalDataCount, boolean, on
     }
   };
 
-  const getColorBOrW = (boolean) => {
-    if (boolean) {
-      return "#000000";
-    } else {
-      return "#FFFFFF";
-    }
-  };
+  // const getColorBOrW = (boolean) => {
+  //   if (boolean) {
+  //     return "#000000";
+  //   } else {
+  //     return "#FFFFFF";
+  //   }
+  // };
 
   const loadMoreData = useCallback(() => { // Fix the function name here
     if (loading) {

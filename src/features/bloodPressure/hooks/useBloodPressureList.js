@@ -56,7 +56,7 @@ function useBloodPressureList() {
     } finally {
       dispatch(setIsLoading(false));
     }
-  }, [dispatch, filter]);
+  }, [dispatch, filter, pagination.size]);
 
   const getUserDropDown = useCallback(async () => {
     try {
