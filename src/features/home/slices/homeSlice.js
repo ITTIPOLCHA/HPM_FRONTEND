@@ -4,6 +4,7 @@ const homeSlice = createSlice({
     name: "home",
     initialState: {
         isLoading: false,
+        isLoadingStatus: false,
         states: {},
         userByLevel: [],
         userByStatusFlag: [],
@@ -11,6 +12,9 @@ const homeSlice = createSlice({
     reducers: {
         setIsLoading(state, action) {
             state.isLoading = action.payload;
+        },
+        setIsLoadingStatus(state, action) {
+            state.isLoadingStatus = action.payload;
         },
         setState(state, action) {
             state.states = action.payload;
@@ -24,6 +28,6 @@ const homeSlice = createSlice({
     },
 });
 
-export const { setIsLoading, setState, setUserByLevel, setUserByStatusFlag } =
+export const { setIsLoading, setIsLoadingStatus, setState, setUserByLevel, setUserByStatusFlag } =
     homeSlice.actions;
 export default homeSlice.reducer;

@@ -7,6 +7,7 @@ import {
 import { Dropdown, Space, Table } from "antd";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const BloodPressureTable = ({
   onChange = () => { },
@@ -16,6 +17,7 @@ const BloodPressureTable = ({
   dataSource = [],
 }) => {
   const { t } = useTranslation();
+  const navigator = useNavigate();
 
   const columns = [
     {
@@ -104,50 +106,21 @@ const BloodPressureTable = ({
                 items: [
                   {
                     key: "1",
-                    label: (
-                      <a
-                        href={`/patient/${record?.createBy?.id}`}
-                        style={{ color: "grey", fontSize: "14px" }}
-                      >
-                        {t("action.view")}
-                      </a>
-                    ),
-                    icon: (
-                      <EyeOutlined style={{ fontSize: "18px", color: "gray" }} />
-                    ),
+                    label: t("action.view"),
+                    icon: <EyeOutlined style={{ fontSize: "18px", color: "gray" }} />,
+                    onClick: () => navigator(`/patient/${record?.createBy?.id}`),
                   },
                   {
                     key: "2",
-                    label: (
-                      <a
-                        href={`/blood_pressure/${record?.id}/edit`}
-                        style={{ color: "grey", fontSize: "14px" }}
-                      >
-                        {t("action.edit")}
-                      </a>
-                    ),
-                    icon: (
-                      <EditOutlined style={{ fontSize: "18px", color: "gray" }} />
-                    ),
+                    label: t("action.edit"),
+                    icon: <EditOutlined style={{ fontSize: "18px", color: "gray" }} />,
+                    onClick: () => navigator(`/blood_pressure/${record?.id}/edit`),
                   },
                   {
                     key: "3",
-                    label: (
-                      <span
-                        onClick={(e) => {
-                          e.preventDefault();
-                          onDelete(record?.id);
-                        }}
-                        style={{ color: "grey", fontSize: "14px" }}
-                      >
-                        {t("action.delete")}
-                      </span>
-                    ),
-                    icon: (
-                      <DeleteOutlined
-                        style={{ fontSize: "18px", color: "gray" }}
-                      />
-                    ),
+                    label: t("action.delete"),
+                    icon: <DeleteOutlined style={{ fontSize: "18px", color: "gray" }} />,
+                    onClick: () => onDelete(record?.id),
                   },
                 ],
               }}

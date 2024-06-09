@@ -25,7 +25,7 @@ function useSignUp() {
         password: values.password,
         firstName: values.name,
         lastName: values.surName,
-        phone: values.phoneNo,
+        phone: values.phone,
         hn: generateRandomString()
       };
       

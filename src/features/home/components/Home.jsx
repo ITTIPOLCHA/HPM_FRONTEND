@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import styles from "../styles/Home.module.css";
 
 function Home({
+  isLoadingStatus = true,
   currentDate = "",
   currentTime = "",
   states = {},
@@ -21,7 +22,7 @@ function Home({
   onCheckboxChange,
 }) {
   const { t } = useTranslation();
-  const hasDateTime = currentDate && currentTime;
+  const hasDateTime = currentDate;
 
   return (
     <MainLayout
@@ -30,7 +31,7 @@ function Home({
     >
       <div className={styles.layout}>
         <CardContainer width="100%" height="fit-content">
-          {hasDateTime && (
+          {currentDate && (
             <>
               <div className={styles.header}>{t("home.label.card_one")}</div>
               <div className={styles.sub_header}>
@@ -53,7 +54,7 @@ function Home({
               </div>
             </>
           )}
-          {!hasDateTime && (
+          {!currentDate && (
             <div className={styles.header}>
               {t("home.label.loading")} <LoadingOutlined />
             </div>
@@ -109,7 +110,7 @@ function Home({
           <div className={styles.header_list}>{t("home.label.card_six")}</div>
           <MyList
             height={"35rem"}
-            data={userByLevel}
+            data={currentDate ? userByLevel : []}
             totalDataCount={userByLevel.length}
             boolean={false}
             onCheckboxChange={onCheckboxChange}
@@ -118,7 +119,7 @@ function Home({
         <div style={{ width: "49%" }} height="fit-content">
           <>
             <CardContainer width="100%" height="fit-content" color="#6F42C1">
-              {hasDateTime && (
+              {currentDate && (
                 <div
                   className={styles.header_mini}
                   style={{ marginBottom: "1.5rem", padding: "0.5rem" }}
@@ -153,7 +154,7 @@ function Home({
                   </div>
                 </div>
               )}
-              {!hasDateTime && (
+              {!currentDate && (
                 <div className={styles.header_mini}>
                   {t("home.label.loading")} <LoadingOutlined />
                 </div>
@@ -165,10 +166,11 @@ function Home({
               </div>
               <MyList
                 height={"24.5rem"}
-                data={userByStatusFlag}
+                data={currentDate ? userByStatusFlag : []}
                 totalDataCount={userByStatusFlag.length}
                 boolean={true}
                 onCheckboxChange={onCheckboxChange}
+                isLoading = {isLoadingStatus}
               />
             </CardContainer>
           </>

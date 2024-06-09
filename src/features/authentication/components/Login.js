@@ -1,7 +1,7 @@
 import { Col, Divider, Row, Switch, Typography } from "antd";
 import { Field, Form, Formik } from "formik";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Button } from "components/elements";
 import { Input, Password } from "components/form";
@@ -11,6 +11,7 @@ import useLoginSchema from "../schemas/loginSchema";
 import styles from "../styles/Login.module.css";
 
 function Login({ isLoading = false, handleLogin = () => {} }) {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const validationSchema = useLoginSchema();
 
@@ -96,7 +97,7 @@ function Login({ isLoading = false, handleLogin = () => {} }) {
                 size="large"
                 htmlType="button"
                 onClick={() => {
-                  window.location.href = "/sign_up";
+                  navigate("/sign_up")
                 }}
               >
                 {t("sign_up.entity").toUpperCase()}

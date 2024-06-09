@@ -4,21 +4,23 @@ import {
   EyeOutlined,
   MoreOutlined,
 } from "@ant-design/icons";
-import { Dropdown, Space, Table,Checkbox } from "antd";
-import { useTranslation } from "react-i18next";
+import { Checkbox, Dropdown, Space, Table } from "antd";
 import alert from "components/elements/Alert";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const PatientTable = ({
-  onChange = () => {},
-  onDelete = () => {},
-  onCheckboxChange = () => {},
+  onChange = () => { },
+  onDelete = () => { },
+  onCheckboxChange = () => { },
   isLoading = false,
   pagination = {},
   dataSource = [],
 }) => {
+  const navigator = useNavigate();
   const { t } = useTranslation();
   const copyPhoneNumber = (phone) => {
-    navigator.clipboard.writeText(phone);
+    window.navigator.clipboard.writeText(phone);
   };
 
   const columns = [
@@ -117,7 +119,7 @@ const PatientTable = ({
         <Checkbox
           checked={checkState}
           onChange={() => onCheckboxChange(!checkState, record.id)}
-          style={{ cursor: "pointer"}}
+          style={{ cursor: "pointer" }}
         />
       ),
     },
@@ -134,50 +136,21 @@ const PatientTable = ({
               items: [
                 {
                   key: "1",
-                  label: (
-                    <a
-                      href={`/patient/${record.id}`}
-                      style={{ color: "grey", fontSize: "14px" }}
-                    >
-                      {t("action.view")}
-                    </a>
-                  ),
-                  icon: (
-                    <EyeOutlined style={{ fontSize: "18px", color: "gray" }} />
-                  ),
+                  label: t("action.view"),
+                  icon: <EyeOutlined style={{ fontSize: "18px", color: "gray" }} />,
+                  onClick: () => navigator(`/patient/${record?.id}`),
                 },
                 {
                   key: "2",
-                  label: (
-                    <a
-                      href={`/patient/${record.id}/edit`}
-                      style={{ color: "grey", fontSize: "14px" }}
-                    >
-                      {t("action.edit")}
-                    </a>
-                  ),
-                  icon: (
-                    <EditOutlined style={{ fontSize: "18px", color: "gray" }} />
-                  ),
+                  label: t("action.edit"),
+                  icon: <EditOutlined style={{ fontSize: "18px", color: "gray" }} />,
+                  onClick: () => navigator(`/patient/${record?.id}/edit`),
                 },
                 {
                   key: "3",
-                  label: (
-                    <span
-                      onClick={(e) => {
-                        e.preventDefault();
-                        onDelete(record.id);
-                      }}
-                      style={{ color: "grey", fontSize: "14px" }}
-                    >
-                      {t("action.delete")}
-                    </span>
-                  ),
-                  icon: (
-                    <DeleteOutlined
-                      style={{ fontSize: "18px", color: "gray" }}
-                    />
-                  ),
+                  label: t("action.delete"),
+                  icon: <DeleteOutlined style={{ fontSize: "18px", color: "gray" }} />,
+                  onClick: () => onDelete(record?.id),
                 },
               ],
             }}

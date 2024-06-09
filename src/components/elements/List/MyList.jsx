@@ -2,7 +2,7 @@ import { Avatar, Checkbox, Divider, List, Skeleton } from "antd";
 import { useEffect, useState, useCallback } from "react"; // Fix the import here
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const MyList = ({ height = "", data = [], totalDataCount, boolean, onCheckboxChange }) => {
+const MyList = ({ height = "", data = [], totalDataCount, boolean, onCheckboxChange, isLoading }) => {
   const [loading, setLoading] = useState(false);
 
   const getColorForLevel = (level) => {
@@ -66,6 +66,7 @@ const MyList = ({ height = "", data = [], totalDataCount, boolean, onCheckboxCha
         scrollableTarget="scrollableDiv"
       >
         <List
+          loading={isLoading}
           dataSource={data}
           renderItem={(item) => (
             <List.Item
