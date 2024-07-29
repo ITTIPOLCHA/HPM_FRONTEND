@@ -1,6 +1,6 @@
 import { Modal } from "antd";
 import { Alert } from "components/elements";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useReducer, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { generateRandomString } from "utils/helper";
@@ -12,7 +12,7 @@ function toParams(params = {}) {
   return {
     pagination: {
       page: pagination.page,
-      size: pagination.pageSize,
+      pageSize: pagination.pageSize,
     },
     sortBy: sortBy
       .filter((s) => s.order !== undefined)
@@ -23,15 +23,22 @@ function toParams(params = {}) {
   };
 }
 
+const paginationReducer = (state, action) => {
+  switch (action.type) {
+    case 'SET_PAGINATION':
+      return { ...state, ...action.payload };
+    default:
+      return state;
+  }
+}
+
 function useBloodPressureList() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.bloodPressure.isLoading);
   const bloodPressureList = useSelector((state) => state.bloodPressure.bloodPressureList);
-  const [pagination, setPagination] = useState({ page: 0, size: 10 });
+  const [pagination, paginationDispatch] = useReducer(paginationReducer, { current: 1, pageSize: 10, total: 0 });
   const [filter, setFilter] = useState({});
-
-  console.log("filter", filter);
 
   const getBloodPressureList = useCallback(async (params = {}) => {
     try {
@@ -39,24 +46,26 @@ function useBloodPressureList() {
       const response = await services.getBloodPressureList({
         requestId: generateRandomString(),
         ...params.pagination,
+        size: params?.pagination?.pageSize,
         ...filter,
         sortBy: params.sortBy,
       });
 
       const formattedBloodPressureList = response.data.bps || [];
       dispatch(setBloodPressureList(formattedBloodPressureList));
-      setPagination({
-        page: response.data.totalPages - 1,
-        total: response.data.totalItems,
-        size: pagination.size,
+      paginationDispatch({
+        type: 'SET_PAGINATION',
+        payload: {
+          current: params.pagination.page + 1,
+          total: response.data.totalItems,
+        },
       });
     } catch (error) {
-      // Handle error gracefully, e.g., set error state and display error message
       console.error("Error fetching patient list:", error);
     } finally {
       dispatch(setIsLoading(false));
     }
-  }, [dispatch, filter, pagination.size]);
+  }, [dispatch, filter]);
 
   const getUserDropDown = useCallback(async () => {
     try {
@@ -85,7 +94,6 @@ function useBloodPressureList() {
   }, [dispatch]);
 
   const handleOnChange = useCallback((tablePagination, tableSorter) => {
-    setPagination(tablePagination);
     const modifiedSorter = Array.isArray(tableSorter)
       ? [...tableSorter]
       : [tableSorter];
@@ -97,20 +105,34 @@ function useBloodPressureList() {
       sortBy: modifiedSorter,
       ...filter,
     });
-    setPagination({ page: tablePagination.current - 1, size: tablePagination.pageSize })
+    paginationDispatch({
+      type: 'SET_PAGINATION',
+      payload: {
+        current: tablePagination.current,
+        pageSize: tablePagination.pageSize,
+        total: pagination.total,
+      },
+    });
     getBloodPressureList(modifiedParams);
-  }, [getBloodPressureList, filter]);
+  }, [getBloodPressureList, filter, pagination.total]);
 
   const handleOnSubmit = useCallback(
     (values) => {
       setFilter(values);
+      paginationDispatch({
+        type: 'SET_PAGINATION',
+        payload: {
+          current: 1,
+          pageSize: pagination.pageSize,
+          total: pagination.total,
+        },
+      });
     },
-    []
+    [pagination.pageSize, pagination.total]
   );
 
   const handleOnDelete = useCallback(
     async (values) => {
-
       try {
         Modal.confirm({
           title: t("dialog.confirmation.header"),
@@ -125,7 +147,7 @@ function useBloodPressureList() {
               bloodPressureId: values,
             });
             Alert({ message: response.data.status.details[0].value || "Success" });
-            getBloodPressureList({ pagination: { page: pagination.page, size: pagination.size } });
+            getBloodPressureList({ pagination: { page: pagination.current - 1, pageSize: pagination.pageSize } });
           },
           okText: t("common.confirm"),
           cancelText: t("common.cancel"),
@@ -136,13 +158,16 @@ function useBloodPressureList() {
         dispatch(setIsLoading(false));
       }
     },
-    [dispatch, getBloodPressureList, pagination.page, pagination.size, t]
+    [dispatch, getBloodPressureList, pagination, t]
   );
 
   useEffect(() => {
-    getBloodPressureList({ pagination: { page: 0, size: 10 } });
     getUserDropDown();
-  }, [getBloodPressureList, getUserDropDown]);
+  }, [getUserDropDown]);
+
+  useEffect(() => {
+    getBloodPressureList({ pagination: { page: pagination.current - 1, pageSize: pagination.pageSize } });
+  }, [getBloodPressureList, pagination.pageSize, pagination.current]);
 
   return {
     bloodPressureList,

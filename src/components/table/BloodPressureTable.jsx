@@ -13,7 +13,7 @@ const BloodPressureTable = ({
   onChange = () => { },
   onDelete = () => { },
   isLoading = false,
-  pagination = {},
+  pagination = { current: 1, pageSize: 10, total: 0 },
   dataSource = [],
 }) => {
   const { t } = useTranslation();
@@ -29,9 +29,9 @@ const BloodPressureTable = ({
       dataIndex: "id",
       key: "id",
       render: (_, __, index) => {
-        const currentPage = pagination?.page || 1;
-        const pageSize = pagination?.size || 10;
-        return (currentPage - 1) * pageSize + index + 1;
+        const currentPage = pagination?.current || 1;
+        const pageSize = pagination?.pageSize || 10;
+        return isLoading ? "-" : (currentPage - 1) * pageSize + index + 1;
       },
       width: "1%",
     },
@@ -41,6 +41,7 @@ const BloodPressureTable = ({
       key: "sys",
       width: "10%",
       sorter: (a, b) => parseInt(a.sys) - parseInt(b.sys),
+      render: (text) => (isLoading ? "-" : text),
     },
     {
       title: <div className="text-table">{t("blood_pressure.label.dia")}</div>,
@@ -48,6 +49,7 @@ const BloodPressureTable = ({
       key: "dia",
       width: "10%",
       sorter: (a, b) => parseInt(a.dia) - parseInt(b.dia),
+      render: (text) => (isLoading ? "-" : text),
     },
     {
       title: <div className="text-table">{t("blood_pressure.label.pul")}</div>,
@@ -55,6 +57,7 @@ const BloodPressureTable = ({
       key: "pul",
       width: "10%",
       sorter: (a, b) => parseInt(a.pul) - parseInt(b.pul),
+      render: (text) => (isLoading ? "-" : text),
     },
     {
       title: (
@@ -64,7 +67,7 @@ const BloodPressureTable = ({
       key: "createBy",
       width: "20%",
       render: (_, record) =>
-        record.createBy?.firstName + " " + record.createBy?.lastName,
+        isLoading ? "-" : record.createBy?.firstName + " " + record.createBy?.lastName,
     },
     {
       title: (
@@ -74,7 +77,7 @@ const BloodPressureTable = ({
       key: "updateBy",
       width: "20%",
       render: (_, record) =>
-        record.updateBy?.firstName + " " + record.updateBy?.lastName,
+        isLoading ? "-" : record.updateBy?.firstName + " " + record.updateBy?.lastName,
     },
     {
       title: (
@@ -85,6 +88,7 @@ const BloodPressureTable = ({
       width: "20%",
       sorter: (a, b) => moment(a.updateDate) - moment(b.updateDate),
       render: (updateDate) => {
+        if (isLoading) return "-";
         const formattedDate = moment.utc(updateDate)
           .utcOffset('+0700')
           .add(543, 'years')
@@ -98,7 +102,7 @@ const BloodPressureTable = ({
       width: "5%",
       fixed: "right",
       render: (_, record) => {
-        console.log(record);
+        if (isLoading) return "-";
         return (
           <Space size="middle">
             <Dropdown
@@ -134,25 +138,28 @@ const BloodPressureTable = ({
   ];
 
   return (
-    <>
-      <Table
-        columns={columns}
-        dataSource={dataSource}
-        pagination={{
-          ...pagination,
-          showTotal: (total, range) =>
-            t("paginate.description")
-              .replace("{min}", range[0])
-              .replace("{max}", range[1])
-              .replace("{total}", total),
-        }}
-        loading={isLoading}
-        onChange={onChange}
-        scroll={{ x: true }}
-        bordered={true}
-        size="large"
-      />
-    </>
+    <Table
+      columns={columns}
+      dataSource={dataSource}
+      pagination={{
+        ...pagination,
+        showTotal: (total, range) =>
+          t("paginate.description")
+            .replace("{min}", range[0])
+            .replace("{max}", range[1])
+            .replace("{total}", total),
+        current: pagination.current,
+        pageSize: pagination.pageSize,
+        total: pagination.total,
+        showSizeChanger: true, // เพิ่มเพื่อแสดงตัวเลือกขนาดหน้า
+        pageSizeOptions: ['5','10', '20', '50', '100'], // ตัวเลือกขนาดหน้าที่ให้เลือก
+      }}
+      loading={isLoading}
+      onChange={onChange}
+      scroll={{ x: true }}
+      bordered={true}
+      size="large"
+    />
   );
 };
 
