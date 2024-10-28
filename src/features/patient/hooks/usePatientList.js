@@ -28,6 +28,7 @@ function usePatientList() {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.patient.isLoading);
   const patientList = useSelector((state) => state.patient.patientList);
+  const currentId = window.localStorage.getItem("id");
   const [pagination, setPagination] = useState({ page: 0, size: 10 });
   const [filter, setFilter] = useState({});
 
@@ -40,7 +41,7 @@ function usePatientList() {
         ...filter,
         sortBy: params.sortBy,
       });
-      dispatch(setPatientList(response.data.users || []));
+      dispatch(setPatientList(response.data.content || []));
       setPagination({
         page: response.data.totalPages - 1,
         total: response.data.totalItems,
@@ -108,13 +109,14 @@ function usePatientList() {
     [dispatch, getPatientList, pagination.page, pagination.size, t]
   );
 
-  const handleOnCheckboxChange = useCallback(async (checkState, id) => {
+  const handleOnCheckboxChange = useCallback(async (verified, id) => {
     try {
       dispatch(setIsLoading(true));
       const response = await services.updateUserCheckState({
         requestId: generateRandomString(),
         patientId: id,
-        checkStatus: checkState,
+        verified: verified,
+        actionId: currentId,
       });
       Alert({ message: response.data.status.details[0].value || "Success" });
       console.log("pagination", pagination);

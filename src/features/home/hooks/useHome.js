@@ -15,6 +15,7 @@ function useHome() {
   const states = useSelector((state) => state.home.states);
   const userByLevel = useSelector((state) => state.home.userByLevel);
   const userByStatusFlag = useSelector((state) => state.home.userByStatusFlag);
+  const currentId = window.localStorage.getItem("id");
 
   const fetchData = useCallback(async () => {
     try {
@@ -52,13 +53,14 @@ function useHome() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleOnCheckboxChange = useCallback(async (checkState, id) => {
+  const handleOnCheckboxChange = useCallback(async (verified, id) => {
     try {
       dispatch(setIsLoadingStatus(true));
       const response = await services.updateUserCheckState({
         requestId: generateRandomString(),
         patientId: id,
-        checkStatus: checkState,
+        verified: verified,
+        actionId: currentId,
       });
       fetchData();
       Alert({ message: response.data.status.details[0].value || "Success" });

@@ -10,9 +10,9 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 const PatientTable = ({
-  onChange = () => { },
-  onDelete = () => { },
-  onCheckboxChange = () => { },
+  onChange = () => {},
+  onDelete = () => {},
+  onCheckboxChange = () => {},
   isLoading = false,
   pagination = {},
   dataSource = [],
@@ -26,10 +26,10 @@ const PatientTable = ({
   const columns = [
     {
       title: <div className="text-table">{t("patient.label.hn")}</div>,
-      dataIndex: "hn",
-      key: "hn",
+      dataIndex: "hospitalNumber",
+      key: "hospitalNumber",
       width: "5%",
-      sorter: (a, b) => parseInt(a.hn) - parseInt(b.hn),
+      sorter: (a, b) => parseInt(a.hospitalNumber) - parseInt(b.hospitalNumber),
     },
     {
       title: <div className="text-table">{t("patient.label.email")}</div>,
@@ -50,19 +50,19 @@ const PatientTable = ({
     },
     {
       title: <div className="text-table">{t("patient.label.phone")}</div>,
-      dataIndex: "phone",
-      key: "phone",
-      width: "10%",
-      sorter: (a, b) => parseInt(a.phone) - parseInt(b.phone),
-      render: (phone) => (
+      dataIndex: "phoneNumber",
+      key: "phoneNumber",
+      width: "5%",
+      sorter: (a, b) => parseInt(a.phoneNumber) - parseInt(b.phoneNumber),
+      render: (phoneNumber) => (
         <div
           onClick={() => {
-            copyPhoneNumber(phone);
+            copyPhoneNumber(phoneNumber);
             alert({ message: "Copy phone number complete." });
           }}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", textAlign: "center" }}
         >
-          {phone}
+          {phoneNumber}
         </div>
       ),
     },
@@ -70,7 +70,7 @@ const PatientTable = ({
       title: <div className="text-table">{t("patient.label.status")}</div>,
       dataIndex: "statusFlag",
       key: "statusFlag",
-      width: "5%",
+      width: "1%",
       sorter: (a, b) => a.statusFlag.localeCompare(b.statusFlag),
       render: (status) => (
         <div
@@ -81,6 +81,7 @@ const PatientTable = ({
             width: "fit-content",
             color: "white",
             fontWeight: "bold",
+            textAlign: "center"
           }}
         >
           {status}
@@ -96,7 +97,12 @@ const PatientTable = ({
       render: (level) => (
         <div
           style={{
-            backgroundColor: level === "NORMAL" ? "#71C02B" : level === "DANGER" ? "#FF4747" : "#FFC107",
+            backgroundColor:
+              level === "NORMAL"
+                ? "#71C02B"
+                : level === "DANGER"
+                ? "#FF4747"
+                : "#FFC107",
             padding: "6px",
             borderRadius: "5px",
             width: "fit-content",
@@ -110,15 +116,15 @@ const PatientTable = ({
     },
     {
       title: <div className="text-table">{t("patient.label.checkState")}</div>,
-      dataIndex: "checkState",
-      key: "checkState",
+      dataIndex: "verified",
+      key: "verified",
       width: "1%",
-      sorter: (a, b) => a.checkState - b.checkState,
+      sorter: (a, b) => a.verified - b.verified,
       align: "center",
-      render: (checkState, record) => (
+      render: (verified, record) => (
         <Checkbox
-          checked={checkState}
-          onChange={() => onCheckboxChange(!checkState, record.id)}
+          checked={verified}
+          onChange={() => onCheckboxChange(!verified, record.id)}
           style={{ cursor: "pointer" }}
         />
       ),
@@ -137,19 +143,27 @@ const PatientTable = ({
                 {
                   key: "1",
                   label: t("action.view"),
-                  icon: <EyeOutlined style={{ fontSize: "18px", color: "gray" }} />,
+                  icon: (
+                    <EyeOutlined style={{ fontSize: "18px", color: "gray" }} />
+                  ),
                   onClick: () => navigator(`/patient/${record?.id}`),
                 },
                 {
                   key: "2",
                   label: t("action.edit"),
-                  icon: <EditOutlined style={{ fontSize: "18px", color: "gray" }} />,
+                  icon: (
+                    <EditOutlined style={{ fontSize: "18px", color: "gray" }} />
+                  ),
                   onClick: () => navigator(`/patient/${record?.id}/edit`),
                 },
                 {
                   key: "3",
                   label: t("action.delete"),
-                  icon: <DeleteOutlined style={{ fontSize: "18px", color: "gray" }} />,
+                  icon: (
+                    <DeleteOutlined
+                      style={{ fontSize: "18px", color: "gray" }}
+                    />
+                  ),
                   onClick: () => onDelete(record?.id),
                 },
               ],
@@ -173,6 +187,11 @@ const PatientTable = ({
             .replace("{min}", range[0])
             .replace("{max}", range[1])
             .replace("{total}", total),
+        current: pagination.current,
+        pageSize: pagination.pageSize,
+        total: pagination.total,
+        showSizeChanger: true,
+        pageSizeOptions: ["5", "10", "25", "50", "100"],
       }}
       loading={isLoading}
       onChange={onChange}

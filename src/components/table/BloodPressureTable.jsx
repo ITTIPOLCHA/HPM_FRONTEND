@@ -10,8 +10,8 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 const BloodPressureTable = ({
-  onChange = () => { },
-  onDelete = () => { },
+  onChange = () => {},
+  onDelete = () => {},
   isLoading = false,
   pagination = { current: 1, pageSize: 10, total: 0 },
   dataSource = [],
@@ -31,43 +31,57 @@ const BloodPressureTable = ({
       render: (_, __, index) => {
         const currentPage = pagination?.current || 1;
         const pageSize = pagination?.pageSize || 10;
-        return isLoading ? "-" : (currentPage - 1) * pageSize + index + 1;
+        return (
+          <div style={{ textAlign: "center" }}>
+            {isLoading ? "-" : (currentPage - 1) * pageSize + index + 1}
+          </div>
+        );
       },
       width: "1%",
     },
     {
       title: <div className="text-table">{t("blood_pressure.label.sys")}</div>,
-      dataIndex: "sys",
-      key: "sys",
+      dataIndex: "systolicPressure",
+      key: "systolicPressure",
       width: "10%",
-      sorter: (a, b) => parseInt(a.sys) - parseInt(b.sys),
-      render: (text) => (isLoading ? "-" : text),
+      sorter: (a, b) =>
+        parseInt(a.systolicPressure) - parseInt(b.systolicPressure),
+      render: (text) => (
+        <div style={{ textAlign: "center" }}>{isLoading ? "-" : text}</div>
+      ),
     },
     {
       title: <div className="text-table">{t("blood_pressure.label.dia")}</div>,
-      dataIndex: "dia",
-      key: "dia",
+      dataIndex: "diastolicPressure",
+      key: "diastolicPressure",
       width: "10%",
-      sorter: (a, b) => parseInt(a.dia) - parseInt(b.dia),
-      render: (text) => (isLoading ? "-" : text),
+      sorter: (a, b) =>
+        parseInt(a.diastolicPressure) - parseInt(b.diastolicPressure),
+      render: (text) => (
+        <div style={{ textAlign: "center" }}>{isLoading ? "-" : text}</div>
+      ),
     },
     {
       title: <div className="text-table">{t("blood_pressure.label.pul")}</div>,
-      dataIndex: "pul",
-      key: "pul",
+      dataIndex: "pulseRate",
+      key: "pulseRate",
       width: "10%",
-      sorter: (a, b) => parseInt(a.pul) - parseInt(b.pul),
-      render: (text) => (isLoading ? "-" : text),
+      sorter: (a, b) => parseInt(a.pulseRate) - parseInt(b.pulseRate),
+      render: (text) => (
+        <div style={{ textAlign: "center" }}>{isLoading ? "-" : text}</div>
+      ),
     },
     {
       title: (
-        <div className="text-table">{t("blood_pressure.label.create")}</div>
+        <div className="text-table">{t("blood_pressure.label.patient")}</div>
       ),
-      dataIndex: "createBy",
-      key: "createBy",
+      dataIndex: "patient",
+      key: "patient",
       width: "20%",
       render: (_, record) =>
-        isLoading ? "-" : record.createBy?.firstName + " " + record.createBy?.lastName,
+        isLoading
+          ? "-"
+          : record.patient?.firstName + " " + record.patient?.lastName,
     },
     {
       title: (
@@ -77,7 +91,11 @@ const BloodPressureTable = ({
       key: "updateBy",
       width: "20%",
       render: (_, record) =>
-        isLoading ? "-" : record.updateBy?.firstName + " " + record.updateBy?.lastName,
+        isLoading
+          ? "-"
+          : !record.updateBy?.firstName
+          ? record.createBy?.firstName + " " + record.createBy?.lastName
+          : record.updateBy?.firstName + " " + record.updateBy?.lastName,
     },
     {
       title: (
@@ -86,14 +104,17 @@ const BloodPressureTable = ({
       dataIndex: "updateDate",
       key: "updateDate",
       width: "20%",
-      sorter: (a, b) => moment(a.updateDate) - moment(b.updateDate),
-      render: (updateDate) => {
+      sorter: (a, b) =>
+        moment(a?.updateDate ? a?.updateDate : a?.createDate) -
+        moment(b?.updateDate ? b?.updateDate : b?.createDate),
+      render: (_, record) => {
         if (isLoading) return "-";
-        const formattedDate = moment.utc(updateDate)
-          .utcOffset('+0700')
-          .add(543, 'years')
+        const formattedDate = moment
+          .utc(record.updateDate ? record.updateDate : record.createDate)
+          .utcOffset("+0700")
+          .add(543, "years")
           .format("HH:mm:ss - DD/MM/YYYY");
-        return formattedDate;
+        return <div style={{ textAlign: "center" }}>{formattedDate}</div>;
       },
     },
     {
@@ -111,19 +132,33 @@ const BloodPressureTable = ({
                   {
                     key: "1",
                     label: t("action.view"),
-                    icon: <EyeOutlined style={{ fontSize: "18px", color: "gray" }} />,
-                    onClick: () => navigator(`/patient/${record?.createBy?.id}`),
+                    icon: (
+                      <EyeOutlined
+                        style={{ fontSize: "18px", color: "gray" }}
+                      />
+                    ),
+                    onClick: () =>
+                      navigator(`/patient/${record?.createBy?.id}`),
                   },
                   {
                     key: "2",
                     label: t("action.edit"),
-                    icon: <EditOutlined style={{ fontSize: "18px", color: "gray" }} />,
-                    onClick: () => navigator(`/blood_pressure/${record?.id}/edit`),
+                    icon: (
+                      <EditOutlined
+                        style={{ fontSize: "18px", color: "gray" }}
+                      />
+                    ),
+                    onClick: () =>
+                      navigator(`/blood_pressure/${record?.id}/edit`),
                   },
                   {
                     key: "3",
                     label: t("action.delete"),
-                    icon: <DeleteOutlined style={{ fontSize: "18px", color: "gray" }} />,
+                    icon: (
+                      <DeleteOutlined
+                        style={{ fontSize: "18px", color: "gray" }}
+                      />
+                    ),
                     onClick: () => onDelete(record?.id),
                   },
                 ],
@@ -132,7 +167,7 @@ const BloodPressureTable = ({
               <MoreOutlined style={{ fontSize: "25px", color: "gray" }} />
             </Dropdown>
           </Space>
-        )
+        );
       },
     },
   ];
@@ -151,8 +186,8 @@ const BloodPressureTable = ({
         current: pagination.current,
         pageSize: pagination.pageSize,
         total: pagination.total,
-        showSizeChanger: true, // เพิ่มเพื่อแสดงตัวเลือกขนาดหน้า
-        pageSizeOptions: ['5','10', '20', '50', '100'], // ตัวเลือกขนาดหน้าที่ให้เลือก
+        showSizeChanger: true,
+        pageSizeOptions: ["5", "10", "25", "50", "100"],
       }}
       loading={isLoading}
       onChange={onChange}

@@ -43,7 +43,7 @@ function useBloodPressureEdit() {
         requestId: generateRandomString(),
       });
       const formattedUserDropDownNameHn = response.data.map(user => ({
-        label: `${user.firstName} ${user.lastName} ( ${user.hn} )`,
+        label: `${user.firstName} ${user.lastName} ( ${user.hospitalNumber} )`,
         value: user.id,
       }));
       dispatch(setUserDropDownNameHn(formattedUserDropDownNameHn || []));
@@ -70,9 +70,9 @@ function useBloodPressureEdit() {
               bloodPressureId: values.id,
               actionId: currentId,
               userId: values.createBy,
-              sys: values.sys,
-              dia: values.dia,
-              pul: values.pul,
+              systolicPressure: values.systolicPressure,
+              diastolicPressure: values.diastolicPressure,
+              pulseRate: values.pulseRate,
             });
             Alert({ message: response.data.status.details[0].value || "Success" });
             navigate("/blood_pressure");

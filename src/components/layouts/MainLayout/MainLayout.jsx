@@ -60,6 +60,7 @@ const MainLayout = ({
 
   const onOpenChange = (e) => {
     setOpenKeys(e);
+    setSelectedKeys(e);
   };
 
   function modifyKeys(keys = []) {
@@ -88,11 +89,15 @@ const MainLayout = ({
     let link = "";
     if (e.key === "home") {
       link = "/";
+      setSelectedKeys(["home"]);
+      setOpenKeys(["home"]);
     } else {
       const splitedKey = e.key.split(".");
       setOpenKeys([splitedKey[0]]);
       const joinedKey = splitedKey.join("/");
       link = "/" + joinedKey;
+      setSelectedKeys([joinedKey]);
+      setOpenKeys([joinedKey]);
     }
     navigate(link);
   };

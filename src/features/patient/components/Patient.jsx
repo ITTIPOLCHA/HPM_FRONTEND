@@ -36,7 +36,7 @@ const Patient = ({
     {
       key: '1',
       label: t("patient.label.hn"),
-      children: <p>{patient?.hn}</p>,
+      children: <p>{patient?.hospitalNumber}</p>,
     },
     {
       key: '2',
@@ -46,7 +46,7 @@ const Patient = ({
     {
       key: '3',
       label: t("patient.label.phone"),
-      children: <p>{patient?.phone}</p>,
+      children: <p>{patient?.phoneNumber}</p>,
     },
     {
       key: '4',
@@ -102,8 +102,8 @@ const Patient = ({
     {
       key: '15',
       label: t("patient.label.checkState"),
-      children: <Checkbox checked={patient?.checkState}
-      onChange={() => onCheckboxChange(!patient?.checkState, patient?.id)}
+      children: <Checkbox checked={patient?.verified}
+      onChange={() => onCheckboxChange(!patient?.verified, patient?.id)}
           style={{ cursor: "pointer"}}
       />,
     },

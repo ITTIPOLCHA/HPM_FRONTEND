@@ -71,7 +71,7 @@ const FilterSection = ({
                   >
                     <Input
                       label={t("patient.label.phone")}
-                      name="phone"
+                      name="phoneNumber"
                       size="large"
                     />
                   </Col>
@@ -83,7 +83,7 @@ const FilterSection = ({
                   >
                     <Input
                       label={t("patient.label.hn")}
-                      name="hn"
+                      name="hospitalNumber"
                       size="large"
                     />
                   </Col>

@@ -189,7 +189,8 @@
         "createBy": "สร้างโดย : ชื่อ",
         "createByHN": "สร้างโดย : HN",
         "name": "ชื่อ",
-        "hn": "HN"
+        "hn": "HN",
+        "patient":"ผู้ป่วย"
       }
     },
     "change_password": {

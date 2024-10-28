@@ -1,36 +1,27 @@
-/* Home.module.css */
-
 .layout {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
   margin-bottom: 1.5rem;
 }
 
 .header {
-  font-size: 30px;
+  font-size: 2rem;
   font-weight: bold;
-  color: var(--black-color);
   text-align: center;
   margin: 0.5rem 1rem;
 }
 
 .sub_header {
   width: 100%;
-  font-size: 20px;
+  font-size: 1.5rem;
   font-weight: bold;
-  color: var(--black-color);
-  text-align: flex-end;
   margin: 0.5rem 1rem;
 }
 
 .align_right_header {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 2rem;
-}
-
-.align_right {
   display: flex;
   justify-content: flex-end;
 }
@@ -38,6 +29,7 @@
 .icon_and_text_container {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
 }
 
 .right_aligned_text {
@@ -46,22 +38,44 @@
 
 .blue_text {
   color: blue;
-  margin-left: 1rem;
-  margin-right: 0.5rem;
+  font-weight: bold;
 }
 
-.header_mini {
-  font-size: 25px;
-  font-weight: bold;
-  color: var(--white-color);
-  text-align: flex-start;
-  margin: 0.5rem 1rem;
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0.5rem 1rem;
+  }
+
+  .sub_header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0.5rem 1rem;
+  }
 }
 
-.header_list {
-  font-size: 24px;
-  font-weight: bold;
-  color: var(--black-color);
-  text-align: center;
-  margin: 0.5rem 1rem;
+@media (max-width: 480px) {
+  .layout {
+    gap: 1rem;
+  }
+
+  .header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0.5rem 1rem;
+  }
+
+  .sub_header {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0.5rem 1rem;
+  }
 }

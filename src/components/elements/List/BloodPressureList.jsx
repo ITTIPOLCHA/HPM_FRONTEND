@@ -81,13 +81,13 @@ const BloodPressureList = ({ height = "", data = [], totalDataCount, boolean, on
                 title={
                   <h3>
                     <div style={{ marginLeft: 0 }}>
-                      Sys : {item.sys} / Dia : {item.dia} / Pul : {item.pul}
+                      Sys : {item.systolicPressure} / Dia : {item.diastolicPressure} / Pul : {item.pulseRate}
                     </div>
                   </h3>
                 }
               />
               <div style={{ marginRight: "1rem" }}>
-                {dayjs(item.updateDate).format("DD/MM/YYYY hh:mm")}
+                {dayjs(item?.updateDate ? item?.updateDate : item?.createDate).format("DD/MM/YYYY hh:mm")}
               </div>
             </List.Item>
           )}

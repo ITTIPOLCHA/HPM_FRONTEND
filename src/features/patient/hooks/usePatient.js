@@ -13,6 +13,7 @@ function usePatient() {
   const isLoading = useSelector((state) => state.patient.isLoading);
   const patient = useSelector((state) => state.patient.patient);
   const bloodPressureList = useSelector((state) => state.patient.bloodPressureList);
+  const currentId = window.localStorage.getItem("id");
 
   const getPatient = useCallback(async () => {
     try {
@@ -44,13 +45,14 @@ function usePatient() {
     }
   }, [dispatch, id]);
 
-  const handleOnCheckboxChange = useCallback(async (checkState, id) => {
+  const handleOnCheckboxChange = useCallback(async (verified, id) => {
     try {
       dispatch(setIsLoading(true));
       const response = await services.updateUserCheckState({
         requestId: generateRandomString(),
         patientId: id,
-        checkStatus: checkState,
+        verified: verified,
+        actionId: currentId
       });
       Alert({ message: response.data.status.details[0].value || "Success" });
       getPatient()

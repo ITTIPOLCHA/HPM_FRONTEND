@@ -1,6 +1,6 @@
 import { Col, Row, Space } from "antd";
 import { Button, CardContainer } from "components/elements";
-import { Input, Select } from "components/form";
+import { Input, InputNumber, Select } from "components/form";
 import { Formik } from "formik";
 import { useTranslation } from "react-i18next";
 import { Form } from "react-router-dom";
@@ -35,7 +35,7 @@ const FilterSection = ({
                     }}
                   >
                     <Select
-                      name="createBy"
+                      name="patient"
                       label={t("blood_pressure.label.createBy")}
                       placeholder="select user..."
                       size="large"
@@ -49,7 +49,7 @@ const FilterSection = ({
                     }}
                   >
                     <Select
-                      name="createBy"
+                      name="patient"
                       label={t("blood_pressure.label.createByHN")}
                       placeholder="select user..."
                       size="large"
@@ -62,9 +62,9 @@ const FilterSection = ({
                       marginBottom: "10px",
                     }}
                   >
-                    <Input
+                    <InputNumber
                       label={t("blood_pressure.label.sys")}
-                      name="sys"
+                      name="systolicPressure"
                       size="large"
                     />
                   </Col>
@@ -74,9 +74,9 @@ const FilterSection = ({
                       marginBottom: "10px",
                     }}
                   >
-                    <Input
+                    <InputNumber
                       label={t("blood_pressure.label.dia")}
-                      name="dia"
+                      name="diastolicPressure"
                       size="large"
                     />
                   </Col>
@@ -86,9 +86,9 @@ const FilterSection = ({
                       marginBottom: "10px",
                     }}
                   >
-                    <Input
+                    <InputNumber
                       label={t("blood_pressure.label.pul")}
-                      name="pul"
+                      name="pulseRate"
                       size="large"
                     />
                   </Col>

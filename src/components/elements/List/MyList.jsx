@@ -7,13 +7,16 @@ const MyList = ({ height = "", data = [], totalDataCount, boolean, onCheckboxCha
 
   const getColorForLevel = (level) => {
     switch (level) {
-      case "WARNING1":
-      case "WARNING2":
-        return "#FFC107";
-      case "DANGER":
-        return "#FF4747";
+      case "GRADE1":
+        return "#FFFF33";
+      case "GRADE2":
+        return "#FF9933";
+      case "GRADE3":
+        return "#FF0033";
+      case "ISOLATED":
+        return "FF00FF";
       default:
-        return "inherit";
+        return "000000";
     }
   };
 
@@ -25,7 +28,7 @@ const MyList = ({ height = "", data = [], totalDataCount, boolean, onCheckboxCha
     }
   };
 
-  const loadMoreData = useCallback(() => { // Fix the function name here
+  const loadMoreData = useCallback(() => {
     if (loading) {
       return;
     }
@@ -34,7 +37,7 @@ const MyList = ({ height = "", data = [], totalDataCount, boolean, onCheckboxCha
       setLoading(false);
       return;
     }
-  }, [data, loading, totalDataCount]); // Make sure to include all dependencies in the dependency array
+  }, [data, loading, totalDataCount]);
 
   useEffect(() => {
     loadMoreData();
@@ -87,14 +90,14 @@ const MyList = ({ height = "", data = [], totalDataCount, boolean, onCheckboxCha
                 }
                 title={
                   <div style={{ color: getColorBOrW(boolean), marginLeft: 0 }}>
-                    {item.firstName} {item.lastName} ( {item.hn} )
+                    {item.firstName} {item.lastName} ( {item.hospitalNumber} )
                   </div>
                 }
               />
               <div style={{ color: getColorBOrW(boolean), marginRight: "1rem" }}>
-                {item.phone}{" | "}
-                <Checkbox checked={item.checkState}
-                  onChange={() => onCheckboxChange(!item.checkState, item.id)}
+                {item.phoneNumber}{" | "}
+                <Checkbox checked={item.verified}
+                  onChange={() => onCheckboxChange(!item.verified, item.id)}
                 />
               </div>
             </List.Item>

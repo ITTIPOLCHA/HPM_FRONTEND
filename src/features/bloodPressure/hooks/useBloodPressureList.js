@@ -50,8 +50,10 @@ function useBloodPressureList() {
         ...filter,
         sortBy: params.sortBy,
       });
+      console.log(response.data);
+      
 
-      const formattedBloodPressureList = response.data.bps || [];
+      const formattedBloodPressureList = response.data.content || [];
       dispatch(setBloodPressureList(formattedBloodPressureList));
       paginationDispatch({
         type: 'SET_PAGINATION',
@@ -77,11 +79,11 @@ function useBloodPressureList() {
         value: user.id,
       }));
       const formattedUserDropDownHn = response.data.map(user => ({
-        label: `${user.hn}`,
+        label: `${user.hospitalNumber}`,
         value: user.id,
       }));
       const formattedUserDropDownNameHn = response.data.map(user => ({
-        label: `${user.firstName} ${user.lastName} ( ${user.hn} )`,
+        label: `${user.firstName} ${user.lastName} ( ${user.hospitalNumber} )`,
         value: user.id,
       }));
       dispatch(setUserDropDownName(formattedUserDropDownName || []));

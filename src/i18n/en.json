@@ -189,7 +189,8 @@
         "createBy": "Create By : Name",
         "createByHN": "Create By : HN",
         "name": "Name",
-        "hn": "HN"
+        "hn": "HN",
+        "patient":"Patient"
       }
     },
     "change_password": {

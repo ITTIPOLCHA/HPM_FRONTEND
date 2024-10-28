@@ -33,7 +33,7 @@ const BloodPressureEdit = ({
         <Formik
           initialValues={{
             ...bloodPressure,
-            createBy: bloodPressure?.createBy?.firstName + " " + bloodPressure?.createBy?.lastName + " (" + bloodPressure?.createBy?.hn + ")"
+            createBy: bloodPressure?.createBy?.firstName + " " + bloodPressure?.createBy?.lastName + " (" + bloodPressure?.createBy?.hospitalNumber + ")"
           }}
           enableReinitialize
           onSubmit={onSubmit}
@@ -97,7 +97,7 @@ const BloodPressureEdit = ({
                           <Col span={12}>
                             <InputNumber
                               required={true}
-                              name="sys"
+                              name="systolicPressure"
                               label=<b className={styles.infoTopic}>{t("blood_pressure.label.sys")}</b>
                               placeholder=""
                               size="large"
@@ -116,7 +116,7 @@ const BloodPressureEdit = ({
                           <Col span={12}>
                             <Input
                               required={true}
-                              name="dia"
+                              name="diastolicPressure"
                               label=<b className={styles.infoTopic}>{t("blood_pressure.label.dia")}</b>
                               placeholder=""
                               size="large"
@@ -127,7 +127,7 @@ const BloodPressureEdit = ({
                           <Col span={12}>
                             <Input
                               required={true}
-                              name="pul"
+                              name="pulseRate"
                               label=<b className={styles.infoTopic}>{t("blood_pressure.label.pul")}</b>
                               placeholder=""
                               size="large"

@@ -78,7 +78,7 @@ const PatientEdit = ({
                           <Col span={12}>
                             <Input
                               required={true}
-                              name="hn"
+                              name="hospitalNumber"
                               label=<b className={styles.infoTopic}>{t("patient.label.hn")}</b>
                               placeholder=""
                               size="large"
@@ -115,7 +115,7 @@ const PatientEdit = ({
                           <Col span={12}>
                             <Input
                               required={true}
-                              name="phone"
+                              name="phoneNumber"
                               label=<b className={styles.infoTopic}>{t("patient.label.phone")}</b>
                               placeholder=""
                               size="large"
