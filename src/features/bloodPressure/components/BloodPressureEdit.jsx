@@ -33,7 +33,7 @@ const BloodPressureEdit = ({
         <Formik
           initialValues={{
             ...bloodPressure,
-            createBy: bloodPressure?.createBy?.firstName + " " + bloodPressure?.createBy?.lastName + " (" + bloodPressure?.createBy?.hospitalNumber + ")"
+            createBy: bloodPressure?.createBy?.id
           }}
           enableReinitialize
           onSubmit={onSubmit}

@@ -8,7 +8,7 @@ const useForgotPasswordSchema = () => {
     email: Yup.string()
       .email(t("validation.invalid_email"))
       .required(t("validation.required")),
-    phone: Yup.string()
+    phoneNumber: Yup.string()
       .min(9, t("validation.invalid_phone_no"))
       .required(t("validation.required")),
     newPassword: Yup.string()

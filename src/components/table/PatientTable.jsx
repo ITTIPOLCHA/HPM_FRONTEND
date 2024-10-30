@@ -23,26 +23,57 @@ const PatientTable = ({
     window.navigator.clipboard.writeText(phone);
   };
 
+  const getColorForWord = (word) => {
+    switch (word) {
+      case "OPTIMAL":
+        return "#34A853";
+      case "NORMAL":
+        return "#71C02B";
+      case "HIGH":
+        return "#ffea47";
+      case "GRADE1":
+        return "#ff9747";
+      case "GRADE2":
+        return "#ff7247";
+      case "GRADE3":
+        return "#ff4747";
+      case "ISOLATED":
+        return "#af47ff";
+      default:
+        return "#000000";
+    }
+  };
+
   const columns = [
     {
       title: <div className="text-table">{t("patient.label.hn")}</div>,
       dataIndex: "hospitalNumber",
       key: "hospitalNumber",
-      width: "5%",
+      width: "8%",
       sorter: (a, b) => parseInt(a.hospitalNumber) - parseInt(b.hospitalNumber),
+      render: (_, record) => (
+        <div style={{ wordBreak: "break-word", whiteSpace: "normal" }}>
+          {record.hospitalNumber}
+        </div>
+      ),
     },
     {
       title: <div className="text-table">{t("patient.label.email")}</div>,
       dataIndex: "email",
       key: "email",
-      width: "10%",
+      width: "13%",
       sorter: (a, b) => a.email.localeCompare(b.email),
+      render: (_, record) => (
+        <div style={{ wordBreak: "break-word", whiteSpace: "normal" }}>
+          {record.email}
+        </div>
+      ),
     },
     {
       title: <div className="text-table">{t("patient.label.full_name")}</div>,
       dataIndex: "firstName",
       key: "firstName",
-      width: "10%",
+      width: "13%",
       sorter: (a, b) => a.firstName.localeCompare(b.firstName),
       render: (_, record) => {
         return record.firstName + " " + record.lastName;
@@ -52,7 +83,7 @@ const PatientTable = ({
       title: <div className="text-table">{t("patient.label.phone")}</div>,
       dataIndex: "phoneNumber",
       key: "phoneNumber",
-      width: "5%",
+      width: "8%",
       sorter: (a, b) => parseInt(a.phoneNumber) - parseInt(b.phoneNumber),
       render: (phoneNumber) => (
         <div
@@ -60,7 +91,12 @@ const PatientTable = ({
             copyPhoneNumber(phoneNumber);
             alert({ message: "Copy phone number complete." });
           }}
-          style={{ cursor: "pointer", textAlign: "center" }}
+          style={{
+            cursor: "pointer",
+            textAlign: "center",
+            wordBreak: "break-word",
+            whiteSpace: "normal",
+          }}
         >
           {phoneNumber}
         </div>
@@ -70,7 +106,7 @@ const PatientTable = ({
       title: <div className="text-table">{t("patient.label.status")}</div>,
       dataIndex: "statusFlag",
       key: "statusFlag",
-      width: "1%",
+      width: "5%",
       sorter: (a, b) => a.statusFlag.localeCompare(b.statusFlag),
       render: (status) => (
         <div
@@ -81,7 +117,7 @@ const PatientTable = ({
             width: "fit-content",
             color: "white",
             fontWeight: "bold",
-            textAlign: "center"
+            textAlign: "center",
           }}
         >
           {status}
@@ -97,12 +133,7 @@ const PatientTable = ({
       render: (level) => (
         <div
           style={{
-            backgroundColor:
-              level === "NORMAL"
-                ? "#71C02B"
-                : level === "DANGER"
-                ? "#FF4747"
-                : "#FFC107",
+            backgroundColor: getColorForWord(level),
             padding: "6px",
             borderRadius: "5px",
             width: "fit-content",
@@ -132,7 +163,7 @@ const PatientTable = ({
     {
       title: <div className="text-table">{t("action.action")}</div>,
       key: "action",
-      width: "5%",
+      width: "1%",
       fixed: "right",
       align: "center",
       render: (_, record) => (

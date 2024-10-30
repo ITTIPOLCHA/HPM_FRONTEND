@@ -8,13 +8,13 @@ const MyList = ({ height = "", data = [], totalDataCount, boolean, onCheckboxCha
   const getColorForLevel = (level) => {
     switch (level) {
       case "GRADE1":
-        return "#FFFF33";
+        return "#ff9747";
       case "GRADE2":
-        return "#FF9933";
+        return "#ff7247";
       case "GRADE3":
-        return "#FF0033";
+        return "#ff4747";
       case "ISOLATED":
-        return "FF00FF";
+        return "#af47ff";
       default:
         return "000000";
     }

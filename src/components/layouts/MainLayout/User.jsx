@@ -19,6 +19,7 @@ import session from "utils/session";
 const User = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const profile = window.localStorage.getItem("name");
 
   const handleChange = useCallback((lng) => {
     window.localStorage.setItem("lang", lng);
@@ -47,6 +48,10 @@ const User = () => {
     <Dropdown
       menu={{
         items: [
+          {
+            key: "0",
+            label: <span style={{fontWeight: "bold" }}>{profile}</span>,
+          },
           {
             key: "1",
             label: <span>{t("user.label.language")}</span>,

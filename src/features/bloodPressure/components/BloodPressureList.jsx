@@ -1,13 +1,12 @@
 import { FilterOutlined } from "@ant-design/icons";
-import { Button, Row, Space } from "antd";
-import { CardContainer } from "components/elements";
+import { Row, Space } from "antd";
+import { Button, CardContainer } from "components/elements";
 import { MainLayout } from "components/layouts";
 import BloodPressureTable from "components/table/BloodPressureTable";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import styles from "../styles/BloodPressureList.module.css";
-// import { BloodPressureChart } from "./BloodPressureChart";
 import FilterSection from "./BloodPressureFitter";
 
 const BloodPressureList = ({
@@ -51,9 +50,7 @@ const BloodPressureList = ({
         <FilterSection
           showFilterForm={showFilterForm}
           onSubmit={onSubmit}
-          onClear={() => {
-            onClear();
-          }}
+          onClear={onClear}
           userDropDownName={userDropDownName}
           userDropDownHn={userDropDownHn}
           initialValues={filter}
@@ -67,12 +64,6 @@ const BloodPressureList = ({
             onChange={onChange}
           />
         </CardContainer>
-        {/* <BloodPressureChart
-          dates={dates}
-          sysData={sysData}
-          diaData={diaData}
-          pulData={pulData}
-        /> */}
       </Space>
     </MainLayout>
   );

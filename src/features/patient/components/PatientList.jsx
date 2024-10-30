@@ -4,7 +4,6 @@ import { Button, CardContainer } from "components/elements";
 import { MainLayout } from "components/layouts";
 import PatientTable from "components/table/PatientTable";
 import { useTranslation } from "react-i18next";
-
 import { useState } from "react";
 import styles from "../styles/PatientList.module.css";
 import FilterSection from "./PatientFitter";

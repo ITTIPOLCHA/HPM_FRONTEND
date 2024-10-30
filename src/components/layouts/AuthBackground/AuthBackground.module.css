@@ -9,6 +9,12 @@
   background-color: #fffbeb;
 }
 
+.containerMd {
+  background-color: #134790;
+  width: 100%;
+  min-height: 100vh;
+}
+
 .background {
   position: absolute;
   z-index: -1;

@@ -8,13 +8,16 @@ import { AuthBackground } from "components/layouts";
 
 import useSignUpSchema, { signUpInitialValues } from "../schemas/signUpSchema";
 import styles from "../styles/SignUp.module.css";
+import { useNavigate } from "react-router-dom";
 
-const SignUp = ({
-  isLoading = false,
-  handleSignUp = () => { },
-}) => {
+const SignUp = ({ isLoading = false, handleSignUp = () => {} }) => {
   const { t } = useTranslation();
   const validationSchema = useSignUpSchema();
+  const navigate = useNavigate();
+
+  const handleSignInClick = () => {
+    navigate("/sign_in");
+  };
 
   return (
     <AuthBackground showLanguageSwitcher>
@@ -32,9 +35,12 @@ const SignUp = ({
                 <p className={styles.formHeader}>
                   {t("sign_up.label.sign_up")}
                 </p>
-                <Row gutter={[24, 12]} >
+                <Row gutter={[24, 12]}>
                   <Col span={12}>
-                    <Typography.Title level={5}>{t("sign_up.input.name")} <span className={styles.request}>*</span></Typography.Title>
+                    <Typography.Title level={5}>
+                      {t("sign_up.input.name")}{" "}
+                      <span className={styles.request}>*</span>
+                    </Typography.Title>
                     <Input
                       name="name"
                       placeholder={`Ex. พยายาม`}
@@ -42,7 +48,10 @@ const SignUp = ({
                     />
                   </Col>
                   <Col span={12}>
-                    <Typography.Title level={5}>{t("sign_up.input.surName")} <span className={styles.request}>*</span></Typography.Title>
+                    <Typography.Title level={5}>
+                      {t("sign_up.input.surName")}{" "}
+                      <span className={styles.request}>*</span>
+                    </Typography.Title>
                     <Input
                       name="surName"
                       placeholder={`Ex. จะจบ`}
@@ -50,7 +59,10 @@ const SignUp = ({
                     />
                   </Col>
                   <Col span={24}>
-                    <Typography.Title level={5}>{t("sign_up.input.email")} <span className={styles.request}>*</span></Typography.Title>
+                    <Typography.Title level={5}>
+                      {t("sign_up.input.email")}{" "}
+                      <span className={styles.request}>*</span>
+                    </Typography.Title>
                     <Input
                       name="email"
                       placeholder={`Ex. example@gmail.com`}
@@ -58,7 +70,10 @@ const SignUp = ({
                     />
                   </Col>
                   <Col span={24}>
-                    <Typography.Title level={5}>{t("sign_up.input.password")} <span className={styles.request}>*</span></Typography.Title>
+                    <Typography.Title level={5}>
+                      {t("sign_up.input.password")}{" "}
+                      <span className={styles.request}>*</span>
+                    </Typography.Title>
                     <Password
                       name="password"
                       placeholder={`Ex. Password123!`}
@@ -66,7 +81,10 @@ const SignUp = ({
                     />
                   </Col>
                   <Col span={24}>
-                    <Typography.Title level={5}>{t("sign_up.input.phoneNo")} <span className={styles.request}>*</span></Typography.Title>
+                    <Typography.Title level={5}>
+                      {t("sign_up.input.phoneNo")}{" "}
+                      <span className={styles.request}>*</span>
+                    </Typography.Title>
                     <Input
                       name="phone"
                       placeholder={`Ex. 0812345678`}
@@ -86,7 +104,12 @@ const SignUp = ({
                 <Row justify="center">
                   <p>
                     {t("sign_up.already_account")}{" "}
-                    <a href="/sign_in">{t("sign_up.sign_in")}</a>
+                    <a
+                      onClick={handleSignInClick}
+                      style={{ cursor: "pointer" }}
+                    >
+                      {t("sign_up.sign_in")}
+                    </a>
                   </p>
                 </Row>
               </Space>

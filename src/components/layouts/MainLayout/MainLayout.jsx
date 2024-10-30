@@ -1,11 +1,25 @@
+import React from "react";
 import {
   HeartOutlined,
   HomeOutlined,
   LeftOutlined,
+  MenuOutlined,
   RightOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Alert, Button, Col, Flex, Layout, Menu, Row, Space, theme } from "antd";
+import {
+  Alert,
+  Button,
+  Col,
+  Drawer,
+  Flex,
+  Grid,
+  Layout,
+  Menu,
+  Row,
+  Space,
+  theme,
+} from "antd";
 import Logo2 from "assets/images/Mahidol_U.png";
 import Logo from "assets/images/pattern_MU-logo.png";
 import cx from "classnames";
@@ -23,6 +37,7 @@ import User from "./User";
 import { setCollapsed } from "./slices/mainSlice";
 
 const { Header, Sider, Content } = Layout;
+const { useBreakpoint } = Grid;
 
 const MainLayout = ({
   className = "",
@@ -41,6 +56,11 @@ const MainLayout = ({
   const navigate = useNavigate();
   const [selectedKeys, setSelectedKeys] = useState(["home"]);
   const [openKeys, setOpenKeys] = useState(["home"]);
+  const screens = useBreakpoint();
+
+  const [drawerVisible, setDrawerVisible] = useState(false);
+
+  const toggleDrawer = () => setDrawerVisible(!drawerVisible);
 
   const getState = useCallback(async () => {
     try {
@@ -123,153 +143,229 @@ const MainLayout = ({
   ];
 
   return (
-    <Layout className={cx(styles.container, className)} hasSider={true}>
-      <Sider
-        width="27vh"
-        className={cx(styles.sidebar)}
-        style={{
-          position: "sticky",
-          backgroundColor: "#FFFBEB",
-        }}
-        trigger={null}
-        collapsible
-        collapsed={collapsed}
-      >
-        <div
-          style={{
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
-        >
-          <div style={{ marginTop: "10px" }}>
-            {collapsed ? (
-              <img
-                src={Logo2}
-                className={styles.logo2}
-                alt="M logo"
-                onClick={() => dispatch(setCollapsed(!collapsed))}
-              />
-            ) : (
-              <img
-                onClick={() => dispatch(setCollapsed(!collapsed))}
-                src={Logo}
-                className={styles.logo}
-                alt="M logo"
-              />
-            )}
-            <Menu
+    <>
+      {screens.lg ? (
+        <Layout className={cx(styles.container, className)} hasSider={true}>
+          <Sider
+            width="27vh"
+            className={cx(styles.sidebar)}
+            style={{
+              position: "sticky",
+              backgroundColor: "#FFFBEB",
+            }}
+            trigger={null}
+            collapsible
+            collapsed={collapsed}
+          >
+            <div
               style={{
-                overflowY: "auto",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
               }}
-              className={styles.menu}
-              defaultSelectedKeys={["home"]}
+            >
+              <div style={{ marginTop: "10px" }}>
+                {collapsed ? (
+                  <img
+                    src={Logo2}
+                    className={styles.logo2}
+                    alt="M logo"
+                    onClick={() => dispatch(setCollapsed(!collapsed))}
+                  />
+                ) : (
+                  <img
+                    onClick={() => dispatch(setCollapsed(!collapsed))}
+                    src={Logo}
+                    className={styles.logo}
+                    alt="M logo"
+                  />
+                )}
+                <Menu
+                  style={{
+                    overflowY: "auto",
+                  }}
+                  className={styles.menu}
+                  defaultSelectedKeys={["home"]}
+                  mode="inline"
+                  selectedKeys={selectedKeys}
+                  openKeys={openKeys}
+                  items={MENU_LIST.map((entity) => ({
+                    ...entity,
+                    label: t(`${entity.i18n_key}.header`),
+                    children:
+                      entity.children?.map((child) => ({
+                        ...child,
+                        label: t(`${child.i18n_key}.header`),
+                      })) || entity.children,
+                  }))}
+                  onClick={onMenuClick}
+                  onOpenChange={onOpenChange}
+                  inlineCollapsed={collapsed}
+                />
+              </div>
+              <div style={{ textAlign: "center", width: "100%" }}>
+                <Button
+                  type="text"
+                  onClick={() => dispatch(setCollapsed(!collapsed))}
+                  style={{
+                    width: "100%",
+                    height: "35px",
+                    color: "white",
+                    borderRadius: "0px",
+                  }}
+                >
+                  {collapsed ? <RightOutlined /> : <LeftOutlined />}
+                </Button>
+              </div>
+            </div>
+          </Sider>
+          <Content
+            style={{
+              paddingLeft: 10,
+              backgroundColor: "#FFFBEB",
+              borderRadius: borderRadiusLG,
+            }}
+          >
+            <Header
+              className={styles.header}
+              style={{
+                paddingTop: "10px",
+                paddingLeft: 0,
+                paddingRight: 0,
+                marginLeft: "8px",
+                lineHeight: "20px",
+                borderRadius: borderRadiusLG,
+              }}
+            >
+              <Row className={styles.header}>
+                <Col span={12}>
+                  <Row align="middle" justify="space-between">
+                    <Space size="1" direction="vertical">
+                      <Breadcrumb breadcrumb={breadcrumb} />
+                      <div className={styles.title} style={{}}>
+                        {title}
+                      </div>
+                    </Space>
+                  </Row>
+                </Col>
+                <Col span={11}>
+                  <Flex justify="right">
+                    <Space justify="right" size={24}>
+                      <Notification />
+                      <User />
+                    </Space>
+                  </Flex>
+                </Col>
+                <Col span={1} />
+              </Row>
+            </Header>
+            <Content
+              className={styles.content}
+              style={{
+                margin: "5px 5px",
+                padding: 10,
+                width: "100%",
+                borderRadius: borderRadiusLG,
+              }}
+            >
+              <div className={styles.body}>
+                <div
+                  style={{
+                    height: "max-content",
+                    paddingRight: "1vw",
+                  }}
+                >
+                  {children}
+                </div>
+              </div>
+            </Content>
+          </Content>
+        </Layout>
+      ) : (
+        <Layout className={cx(styles.container, className)}>
+          <Content
+            style={{
+              paddingLeft: 10,
+              backgroundColor: "#FFFBEB",
+              borderRadius: borderRadiusLG,
+            }}
+          >
+            <Header
+              className={styles.header_md}
+              style={{
+                paddingTop: "10px",
+                paddingLeft: 0,
+                paddingRight: 0,
+                marginLeft: "8px",
+                lineHeight: "20px",
+                borderRadius: borderRadiusLG,
+              }}
+            >
+              <Row gutter={[24, 24]}>
+                <Col span={12}>
+                  <Row align="middle" justify="space-between">
+                    <Space size="1" direction="vertical">
+                      <Breadcrumb breadcrumb={breadcrumb} />
+                      <div className={styles.title}>{title}</div>
+                    </Space>
+                  </Row>
+                </Col>
+                <Col span={11}>
+                  <Flex justify="right">
+                    <Space justify="right" size={24}>
+                      <Notification />
+                      <User />
+                    </Space>
+                  </Flex>
+                </Col>
+                <Col span={2}>
+                  <Button
+                    icon={<MenuOutlined />}
+                    type="text"
+                    onClick={toggleDrawer}
+                  />
+                </Col>
+              </Row>
+            </Header>
+            <Content
+              className={styles.content}
+              style={{
+                margin: "5px 5px",
+                padding: 10,
+                height: "100%",
+                borderRadius: borderRadiusLG,
+              }}
+            >
+              <div className={styles.body}>
+                <div
+                  style={{
+                    height: "max-content",
+                    paddingRight: "1vw",
+                  }}
+                >
+                  {children}
+                </div>
+              </div>
+            </Content>
+          </Content>
+          <Drawer
+            title="Menu"
+            placement="left"
+            onClose={toggleDrawer}
+            open={drawerVisible}
+          >
+            <Menu
               mode="inline"
               selectedKeys={selectedKeys}
               openKeys={openKeys}
-              items={MENU_LIST.map((entity) => ({
-                ...entity,
-                label: t(`${entity.i18n_key}.header`),
-                children: entity.children?.map((child) => ({
-                  ...child,
-                  label: t(`${child.i18n_key}.header`),
-                })) || entity.children,
-              }))}
+              items={MENU_LIST}
               onClick={onMenuClick}
-              onOpenChange={onOpenChange}
-              inlineCollapsed={collapsed}
             />
-          </div>
-          <div style={{ textAlign: "center", width: "100%" }}>
-            <Button
-              type="text"
-              onClick={() => dispatch(setCollapsed(!collapsed))}
-              style={{
-                width: "100%",
-                height: "35px",
-                color: "white",
-                borderRadius: "0px",
-              }}
-            >
-              {collapsed ? <RightOutlined /> : <LeftOutlined />}
-            </Button>
-          </div>
-        </div>
-      </Sider>
-      <Content
-        style={{
-          paddingLeft: 10,
-          backgroundColor: "#FFFBEB",
-          borderRadius: borderRadiusLG,
-        }}
-      >
-        <Header
-          className={styles.header}
-          style={{
-            paddingTop: "10px",
-            paddingLeft: 0,
-            paddingRight: 0,
-            marginLeft: "8px",
-            lineHeight: "20px",
-            borderRadius: borderRadiusLG,
-          }}
-        >
-          <Row className={styles.header}>
-            <Col span={12}>
-              <Row align="middle" justify="space-between">
-                <Space size="1" direction="vertical">
-                  <Breadcrumb breadcrumb={breadcrumb} />
-                  <div className={styles.title} style={{}}>
-                    {title}
-                  </div>
-                </Space>
-              </Row>
-            </Col>
-            <Col span={11}>
-              <Flex justify="right">
-                <Space justify="right" size={24}>
-                  <div
-                    className={styles.title}
-                    style={{
-                      backgroundColor: "#AAAAAA",
-                      padding: "6px",
-                      color: "#FFFFFF",
-                      borderRadius: "13px",
-                    }}
-                  >
-                    {profile}
-                  </div>
-                  <Notification />
-                  <User />
-                </Space>
-              </Flex>
-            </Col>
-            <Col span={1} />
-          </Row>
-        </Header>
-        <Content
-          className={styles.content}
-          style={{
-            margin: "5px 5px",
-            padding: 10,
-            minHeight: 280,
-            borderRadius: borderRadiusLG,
-          }}
-        >
-          <div className={styles.body}>
-            <div
-              style={{
-                height: "max-content",
-                paddingRight: "1vw",
-              }}
-            >
-              {children}
-            </div>
-          </div>
-        </Content>
-      </Content>
-    </Layout>
+          </Drawer>
+        </Layout>
+      )}
+    </>
   );
 };
 

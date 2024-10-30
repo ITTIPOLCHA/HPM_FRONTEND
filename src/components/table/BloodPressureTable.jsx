@@ -89,7 +89,7 @@ const BloodPressureTable = ({
       ),
       dataIndex: "updateBy",
       key: "updateBy",
-      width: "20%",
+      width: "25%",
       render: (_, record) =>
         isLoading
           ? "-"
