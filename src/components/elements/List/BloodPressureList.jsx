@@ -1,9 +1,15 @@
 import { Divider, List, Skeleton } from "antd";
-import dayjs from "dayjs";
+import moment from "moment";
 import { useCallback, useEffect, useState } from "react"; // Fix the import here
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const BloodPressureList = ({ height = "", data = [], totalDataCount, boolean, onCheckboxChange }) => {
+const BloodPressureList = ({
+  height = "",
+  data = [],
+  totalDataCount,
+  boolean,
+  onCheckboxChange,
+}) => {
   const [loading, setLoading] = useState(false);
 
   const getColorForLevel = (level) => {
@@ -18,15 +24,8 @@ const BloodPressureList = ({ height = "", data = [], totalDataCount, boolean, on
     }
   };
 
-  // const getColorBOrW = (boolean) => {
-  //   if (boolean) {
-  //     return "#000000";
-  //   } else {
-  //     return "#FFFFFF";
-  //   }
-  // };
-
-  const loadMoreData = useCallback(() => { // Fix the function name here
+  const loadMoreData = useCallback(() => {
+    // Fix the function name here
     if (loading) {
       return;
     }
@@ -81,13 +80,18 @@ const BloodPressureList = ({ height = "", data = [], totalDataCount, boolean, on
                 title={
                   <h3>
                     <div style={{ marginLeft: 0 }}>
-                      Sys : {item.systolicPressure} / Dia : {item.diastolicPressure} / Pul : {item.pulseRate}
+                      Sys : {item.systolicPressure} / Dia :{" "}
+                      {item.diastolicPressure} / Pul : {item.pulseRate}
                     </div>
                   </h3>
                 }
               />
               <div style={{ marginRight: "1rem" }}>
-                {dayjs(item?.updateDate ? item?.updateDate : item?.createDate).format("DD/MM/YYYY hh:mm")}
+                {moment
+                  .utc(item?.updateDate ? item?.updateDate : item?.createDate)
+                  .utcOffset("+0700")
+                  .add(543, "years")
+                  .format("DD/MM/YYYY - HH:mm:ss")}
               </div>
             </List.Item>
           )}

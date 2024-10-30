@@ -1,15 +1,15 @@
 import { DeleteOutlined, EditOutlined, MoreOutlined } from "@ant-design/icons";
 import { Dropdown, Space, Switch, Table } from "antd";
-import dayjs from "dayjs";
+import moment from "moment";
 import { useTranslation } from "react-i18next";
 
 const NotificationTemplateListTable = ({
   isLoading = false,
   pagination = {},
   dataSource = [],
-  onStatus = () => { },
-  onEdit = () => { },
-  onDelete = () => { },
+  onStatus = () => {},
+  onEdit = () => {},
+  onDelete = () => {},
 }) => {
   const { t, i18n } = useTranslation();
 
@@ -56,7 +56,11 @@ const NotificationTemplateListTable = ({
             {name}
             <br />
             {lastModified.time
-              ? dayjs(lastModified.time).format("DD/MM/YYYY hh:mm")
+              ? moment
+                  .utc(lastModified.time)
+                  .utcOffset("+0700")
+                  .add(543, "years")
+                  .format("DD/MM/YYYY HH:mm")
               : "-"}
           </>
         );
