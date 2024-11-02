@@ -55,7 +55,6 @@ function useBloodPressureEdit() {
 
   const onSubmit = useCallback(
     async (values) => {
-      console.log("values", values);
       try {
         Modal.confirm({
           title: t("dialog.confirmation.header"),

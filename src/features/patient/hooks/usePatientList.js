@@ -67,7 +67,6 @@ function usePatientList() {
       sortBy: modifiedSorter,
       ...filter,
     });
-    console.log({ page: tablePagination.current, size: tablePagination.pageSize });
     setPagination({ page: tablePagination.current - 1, size: tablePagination.pageSize })
     getPatientList(modifiedParams);
   }, [filter, getPatientList]);
@@ -119,7 +118,6 @@ function usePatientList() {
         actionId: currentId,
       });
       Alert({ message: response.data.status.details[0].value || "Success" });
-      console.log("pagination", pagination);
       getPatientList({ pagination: { page: pagination.page, size: pagination.size } });
     } catch (error) {
       Alert({ type: "error", resultObject: error });

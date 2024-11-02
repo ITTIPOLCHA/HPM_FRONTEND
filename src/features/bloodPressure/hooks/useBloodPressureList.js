@@ -50,8 +50,6 @@ function useBloodPressureList() {
         ...filter,
         sortBy: params.sortBy,
       });
-      console.log(response.data);
-      
 
       const formattedBloodPressureList = response.data.content || [];
       dispatch(setBloodPressureList(formattedBloodPressureList));
