@@ -14,38 +14,41 @@ function useSignUp() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSignUp = useCallback(async (values) => {
-    try {
-      dispatch(setIsLoading(true));
-      dispatch(setIsLogin(false));
-      
-      const modifiedValues = {
-        requestId: generateRandomString(),
-        email: values.email,
-        password: values.password,
-        firstName: values.name,
-        lastName: values.surName,
-        phone: values.phone,
-        hn: generateRandomString()
-      };
-      
-      await signUp(modifiedValues);
-      dispatch(setIsLogin(true));
-      
-      alert({ message: "Success" });
-      alert({ message: t("sign_up.status.successful") });
-      navigate("/sign_in");
-    } catch (error) {
-      alert({
-        type: "error",
-        message: t("sign_up.status.failed"),
-        description: t("sign_up.status.failed_description"),
-        // resultObject: error,
-      });
-    } finally {
-      dispatch(setIsLoading(false));
-    }
-  }, [dispatch, navigate, t]);
+  const handleSignUp = useCallback(
+    async (values) => {
+      try {
+        dispatch(setIsLoading(true));
+        dispatch(setIsLogin(false));
+
+        const modifiedValues = {
+          requestId: generateRandomString(),
+          email: values.email,
+          password: values.password,
+          firstName: values.name,
+          lastName: values.surName,
+          phoneNumber: values.phone,
+          hospitalNumber: generateRandomString(),
+        };
+
+        await signUp(modifiedValues);
+        dispatch(setIsLogin(true));
+
+        alert({ message: "Success" });
+        alert({ message: t("sign_up.status.successful") });
+        navigate("/sign_in");
+      } catch (error) {
+        alert({
+          type: "error",
+          message: t("sign_up.status.failed"),
+          description: t("sign_up.status.failed_description"),
+          // resultObject: error,
+        });
+      } finally {
+        dispatch(setIsLoading(false));
+      }
+    },
+    [dispatch, navigate, t]
+  );
 
   return {
     isLoading,
