@@ -60,7 +60,7 @@ function useBloodPressureEdit() {
           title: t("dialog.confirmation.header"),
           content: (
             <>
-              <p>{t("blood_pressure.message.delete")}</p>
+              <p>{t("blood_pressure.message.edit")}</p>
             </>
           ),
           async onOk() {

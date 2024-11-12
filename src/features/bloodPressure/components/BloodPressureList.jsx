@@ -1,4 +1,4 @@
-import { FilterOutlined } from "@ant-design/icons";
+import { DownloadOutlined, FilterOutlined } from "@ant-design/icons";
 import { Row, Space } from "antd";
 import { Button, CardContainer } from "components/elements";
 import { MainLayout } from "components/layouts";
@@ -12,12 +12,14 @@ import FilterSection from "./BloodPressureFitter";
 const BloodPressureList = ({
   bloodPressureList = [],
   isLoading = false,
+  isDownloading = false,
   pagination = {},
   filter = {},
   onDelete = () => {},
   onChange = () => {},
   onSubmit = () => {},
   onClear = () => {},
+  onDownloadExcel = () => {},
 }) => {
   const { t } = useTranslation();
   const [showFilterForm, setShowFilterForm] = useState(false);
@@ -44,6 +46,13 @@ const BloodPressureList = ({
               onClick={() => setShowFilterForm(!showFilterForm)}
             >
               {t("common.filter")} <FilterOutlined />
+            </Button>
+            <Button
+              type="default"
+              onClick={onDownloadExcel}
+              loading={isDownloading}
+            >
+              {t("common.download")} <DownloadOutlined />
             </Button>
           </Space>
         </Row>

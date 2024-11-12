@@ -4,6 +4,7 @@ function Button({
   id = null,
   className = "",
   disabled = false,
+  loading = false,
   type = "primary",
   htmlType = "button",
   onClick = () => {},
@@ -19,6 +20,7 @@ function Button({
       htmlType={htmlType}
       onClick={onClick}
       size={size}
+      loading={loading}
     >
       {children}
     </AntdButton>

@@ -32,44 +32,53 @@ function usePatientList() {
   const [pagination, setPagination] = useState({ page: 0, size: 10 });
   const [filter, setFilter] = useState({});
 
-  const getPatientList = useCallback(async (params = {}) => {
-    try {
-      dispatch(setIsLoading(true));
-      const response = await services.getPatientList({
-        requestId: generateRandomString(),
-        ...params.pagination,
-        ...filter,
-        sortBy: params.sortBy,
-      });
-      dispatch(setPatientList(response.data.content || []));
-      setPagination({
-        page: response.data.totalPages - 1,
-        total: response.data.totalItems,
-        size: pagination.size,
-      });
-    } catch (error) {
-      console.error("Error fetching patient list:", error);
-    } finally {
-      dispatch(setIsLoading(false));
-    }
-  }, [dispatch, filter, pagination.size]);
+  const getPatientList = useCallback(
+    async (params = {}) => {
+      try {
+        dispatch(setIsLoading(true));
+        const response = await services.getPatientList({
+          requestId: generateRandomString(),
+          ...params.pagination,
+          ...filter,
+          sortBy: params.sortBy,
+        });
+        dispatch(setPatientList(response.data.content || []));
+        setPagination({
+          page: response.data.totalPages - 1,
+          total: response.data.totalItems,
+          size: pagination.size,
+        });
+      } catch (error) {
+        console.error("Error fetching patient list:", error);
+      } finally {
+        dispatch(setIsLoading(false));
+      }
+    },
+    [dispatch, filter, pagination.size]
+  );
 
-  const handleOnChange = useCallback((tablePagination, tableSorter) => {
-    setPagination(tablePagination);
-    const modifiedSorter = Array.isArray(tableSorter)
-      ? [...tableSorter]
-      : [tableSorter];
-    const modifiedParams = toParams({
-      pagination: {
+  const handleOnChange = useCallback(
+    (tablePagination, tableSorter) => {
+      setPagination(tablePagination);
+      const modifiedSorter = Array.isArray(tableSorter)
+        ? [...tableSorter]
+        : [tableSorter];
+      const modifiedParams = toParams({
+        pagination: {
+          page: tablePagination.current - 1,
+          pageSize: tablePagination.pageSize,
+        },
+        sortBy: modifiedSorter,
+        ...filter,
+      });
+      setPagination({
         page: tablePagination.current - 1,
-        pageSize: tablePagination.pageSize,
-      },
-      sortBy: modifiedSorter,
-      ...filter,
-    });
-    setPagination({ page: tablePagination.current - 1, size: tablePagination.pageSize })
-    getPatientList(modifiedParams);
-  }, [filter, getPatientList]);
+        size: tablePagination.pageSize,
+      });
+      getPatientList(modifiedParams);
+    },
+    [filter, getPatientList]
+  );
 
   const handleOnSubmit = useCallback(
     (values) => {
@@ -93,8 +102,12 @@ function usePatientList() {
               requestId: generateRandomString(),
               userId: values,
             });
-            Alert({ message: response.data.status.details[0].value || "Success" });
-            getPatientList({ pagination: { page: pagination.page, size: pagination.size } });
+            Alert({
+              message: response.data.status.details[0].value || "Success",
+            });
+            getPatientList({
+              pagination: { page: pagination.page, size: pagination.size },
+            });
           },
           okText: t("common.confirm"),
           cancelText: t("common.cancel"),
@@ -108,23 +121,28 @@ function usePatientList() {
     [dispatch, getPatientList, pagination.page, pagination.size, t]
   );
 
-  const handleOnCheckboxChange = useCallback(async (verified, id) => {
-    try {
-      dispatch(setIsLoading(true));
-      const response = await services.updateUserCheckState({
-        requestId: generateRandomString(),
-        patientId: id,
-        verified: verified,
-        actionId: currentId,
-      });
-      Alert({ message: response.data.status.details[0].value || "Success" });
-      getPatientList({ pagination: { page: pagination.page, size: pagination.size } });
-    } catch (error) {
-      Alert({ type: "error", resultObject: error });
-    } finally {
-      dispatch(setIsLoading(false));
-    }
-  }, [dispatch, getPatientList, pagination]);
+  const handleOnCheckboxChange = useCallback(
+    async (verified, id) => {
+      try {
+        dispatch(setIsLoading(true));
+        const response = await services.updateUserCheckState({
+          requestId: generateRandomString(),
+          patientId: id,
+          verified: verified,
+          actionId: currentId,
+        });
+        Alert({ message: response.data.status.details[0].value || "Success" });
+        getPatientList({
+          pagination: { page: pagination.page, size: pagination.size },
+        });
+      } catch (error) {
+        Alert({ type: "error", resultObject: error });
+      } finally {
+        dispatch(setIsLoading(false));
+      }
+    },
+    [dispatch, getPatientList, pagination]
+  );
 
   useEffect(() => {
     getPatientList({ pagination: { page: 0, size: 10 } });

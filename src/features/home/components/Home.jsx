@@ -17,6 +17,7 @@ function Home({
   isLoadingStatus = true,
   currentDate = "",
   currentTime = "",
+  daysUntilNextMonth = "",
   states = {},
   userByLevel = [],
   userByStatusFlag = [],
@@ -30,7 +31,7 @@ function Home({
       title={t("home.header")}
       breadcrumb={[{ title: t("home.header") }]}
     >
-      <Row gutter={[24, 10]} style={{ width: "100%", height:"100%" }}>
+      <Row gutter={[24, 10]} style={{ width: "100%", height: "100%" }}>
         <Col xs={24} sm={24} md={24} lg={24}>
           <CardContainer width="100%" height="fit-content">
             {currentDate && (
@@ -42,6 +43,10 @@ function Home({
                     <span className={`${styles.blue_text}`}>{currentDate}</span>
                     {t("home.label.card_one_time")}
                     <span className={`${styles.blue_text}`}>{currentTime}</span>
+                    {t("home.label.card_zero")}
+                    <span className={`${styles.blue_text}`}>
+                      {daysUntilNextMonth}
+                    </span>
                   </div>
                 </div>
               </>
@@ -118,7 +123,7 @@ function Home({
           </CardContainer>
         </Col>
         <Col xs={24} sm={12} md={24} lg={12}>
-          <Row gutter={[24, 10]} >
+          <Row gutter={[24, 10]}>
             <Col span={24}>
               <CardContainer width="100%" height="max-content" color="#451390">
                 {currentDate && (

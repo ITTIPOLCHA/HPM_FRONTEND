@@ -84,6 +84,7 @@
       "entity": "patient",
       "header": "Patient",
       "info": "Patient Information",
+      "edit":"Edit Patient",
       "label": {
         "patient_information": "Patient Information",
         "patient_id": "No.",
@@ -174,6 +175,7 @@
       "header": "Blood Pressure",
       "edit": "Edit Blood Pressure",
       "message": {
+        "edit":"Are you sure to edit this record ?",
         "delete": "Are you sure to delete this record ?"
       },
       "label": {
@@ -202,6 +204,7 @@
       "header": "Home",
       "label": {
         "loading": "Loading ",
+        "card_zero": "Don't forget to download it again. : ",
         "card_one": "Overview of the pressure measurement system.",
         "card_one_date": "As of : ",
         "card_one_time": "when : ",

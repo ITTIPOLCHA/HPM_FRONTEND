@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.c05a7cd4.css",
-    "main.js": "/static/js/main.bf0bcd62.js",
+    "main.js": "/static/js/main.3181eace.js",
     "static/js/453.3f950eca.chunk.js": "/static/js/453.3f950eca.chunk.js",
     "static/media/Mahidol_U.png": "/static/media/Mahidol_U.e0a542e3eeb4ff59909c.png",
     "static/media/pattern_MU-logo.png": "/static/media/pattern_MU-logo.afad4068f3e9e622a404.png",
     "index.html": "/index.html",
     "main.c05a7cd4.css.map": "/static/css/main.c05a7cd4.css.map",
-    "main.bf0bcd62.js.map": "/static/js/main.bf0bcd62.js.map",
+    "main.3181eace.js.map": "/static/js/main.3181eace.js.map",
     "453.3f950eca.chunk.js.map": "/static/js/453.3f950eca.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c05a7cd4.css",
-    "static/js/main.bf0bcd62.js"
+    "static/js/main.3181eace.js"
   ]
 }

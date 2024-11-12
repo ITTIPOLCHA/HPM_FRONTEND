@@ -15,8 +15,8 @@ const BloodPressureEdit = ({
   isLoading = false,
   bloodPressure = {},
   userDropDownNameHn = [],
-  onCancel = () => { },
-  onSubmit = () => { },
+  onCancel = () => {},
+  onSubmit = () => {},
 }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -33,7 +33,7 @@ const BloodPressureEdit = ({
         <Formik
           initialValues={{
             ...bloodPressure,
-            createBy: bloodPressure?.createBy?.id
+            createBy: bloodPressure?.createBy?.id,
           }}
           enableReinitialize
           onSubmit={onSubmit}
@@ -98,16 +98,21 @@ const BloodPressureEdit = ({
                             <InputNumber
                               required={true}
                               name="systolicPressure"
-                              label=<b className={styles.infoTopic}>{t("blood_pressure.label.sys")}</b>
+                              label=<b className={styles.infoTopic}>
+                                {t("blood_pressure.label.sys")}
+                              </b>
                               placeholder=""
                               size="large"
                             />
                           </Col>
                           <Col span={12}>
                             <Select
+                              disabled
                               required={true}
                               name="createBy"
-                              label=<b className={styles.infoTopic}>{t("blood_pressure.label.name")}</b>
+                              label=<b className={styles.infoTopic}>
+                                {t("blood_pressure.label.name")}
+                              </b>
                               placeholder="Please Select"
                               size="large"
                               options={userDropDownNameHn}
@@ -117,18 +122,21 @@ const BloodPressureEdit = ({
                             <Input
                               required={true}
                               name="diastolicPressure"
-                              label=<b className={styles.infoTopic}>{t("blood_pressure.label.dia")}</b>
+                              label=<b className={styles.infoTopic}>
+                                {t("blood_pressure.label.dia")}
+                              </b>
                               placeholder=""
                               size="large"
                             />
                           </Col>
-                          <Col span={12}>
-                          </Col>
+                          <Col span={12}></Col>
                           <Col span={12}>
                             <Input
                               required={true}
                               name="pulseRate"
-                              label=<b className={styles.infoTopic}>{t("blood_pressure.label.pul")}</b>
+                              label=<b className={styles.infoTopic}>
+                                {t("blood_pressure.label.pul")}
+                              </b>
                               placeholder=""
                               size="large"
                             />

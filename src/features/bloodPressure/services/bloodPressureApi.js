@@ -23,3 +23,7 @@ export const createBloodPressure = async (params = {}) => {
 export const updateBloodPressureById = async (params = {}) => {
   return await api.post("/v1/bp/a/updateBloodPressureById", params);
 }
+
+export const exportExcel = async (params = {}) => {
+  return await api.post("/v1/bp/export/excel", params);
+}
