@@ -302,7 +302,7 @@ const MainLayout = ({
                 borderRadius: borderRadiusLG,
               }}
             >
-              <Row gutter={[24, 24]}>
+              <Row gutter={[24, 10]}>
                 <Col span={12}>
                   <Row align="middle" justify="space-between">
                     <Space size="1" direction="vertical">
