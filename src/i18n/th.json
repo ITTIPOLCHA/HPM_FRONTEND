@@ -217,7 +217,10 @@
         "card_seven_two": "ผู้ส่ง : ",
         "card_eight": "รายชื่อ ผู้ใช้ที่ยังไม่ส่งค่า"
       },
-      "placeholders": {}
+      "placeholders": {},
+      "unit": {
+        "day": "วัน"
+      }
     },
     "user": {
       "entity": "user",
@@ -242,6 +245,10 @@
         "failed": "รีเซ็ตรหัสผ่านล้มเหลว",
         "failed_description": "อีเมลและหมายเลขไม่ตรงกัน"
       }
+    },
+    "user_management": {
+      "entity": "จัดการผู้ใช้งานระบบ",
+      "header": "จัดการผู้ใช้งานระบบ"
     }
   }
 }

@@ -140,6 +140,11 @@ const MainLayout = ({
       "blood_pressure",
       <HeartOutlined />
     ),
+    getItem(
+      "user_management", 
+      "User management", 
+      "user_management", 
+      <UserOutlined />)
   ];
 
   return (

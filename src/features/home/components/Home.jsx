@@ -33,19 +33,30 @@ function Home({
     >
       <Row gutter={[24, 10]} style={{ width: "100%", height: "100%" }}>
         <Col xs={24} sm={24} md={24} lg={24}>
-          <CardContainer width="100%" height="fit-content">
+          <CardContainer width="100%" height="fit-content" >
             {currentDate && (
               <>
                 <div className={styles.header}>{t("home.label.card_one")}</div>
-                <div className={styles.sub_header}>
-                  <div className={`${styles.icon_and_text_container}`}>
+                <div 
+                  className={styles.sub_header} 
+                  style={{display: "flex", justifyContent: "center"}}
+                >
+                  <div 
+                    className={`${styles.icon_and_text_container}`} 
+                    style={
+                      {
+                        display: "flex", 
+                        flexWrap: "wrap", 
+                      }
+                    }
+                  >
                     {t("home.label.card_one_date")}
                     <span className={`${styles.blue_text}`}>{currentDate}</span>
                     {t("home.label.card_one_time")}
                     <span className={`${styles.blue_text}`}>{currentTime}</span>
                     {t("home.label.card_zero")}
                     <span className={`${styles.blue_text}`}>
-                      {daysUntilNextMonth}
+                      {daysUntilNextMonth} {t("home.unit.day")}
                     </span>
                   </div>
                 </div>

@@ -217,7 +217,10 @@
         "card_seven_two": "Sender : ",
         "card_eight": "List of users at not sent."
       },
-      "placeholders": {}
+      "placeholders": {},
+      "unit": {
+        "day": "day(s)"
+      }
     },
     "user": {
       "entity": "user",
@@ -242,6 +245,10 @@
         "failed": "Reset password failed.",
         "failed_description": "Email and number don't match."
       }
+    },
+    "user_management": {
+      "entity": "User management",
+      "header": "User Management"
     }
   }
 }

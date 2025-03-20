@@ -88,7 +88,7 @@ function Login({ isLoading = false, handleLogin = () => {} }) {
               >
                 {t("sign_in.entity").toUpperCase()}
               </Button>
-              <Divider style={{ margin: "0" }} plain>
+              {/* <Divider style={{ margin: "0" }} plain>
                 {t("common.or")}
               </Divider>
               <Button
@@ -101,7 +101,7 @@ function Login({ isLoading = false, handleLogin = () => {} }) {
                 }}
               >
                 {t("sign_up.entity").toUpperCase()}
-              </Button>
+              </Button> */}
             </Form>
           )}
         </Formik>
