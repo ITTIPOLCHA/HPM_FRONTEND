@@ -6,6 +6,7 @@ import {
   MenuOutlined,
   RightOutlined,
   UserOutlined,
+  IdcardOutlined
 } from "@ant-design/icons";
 import {
   Alert,
@@ -47,7 +48,7 @@ const MainLayout = ({
 }) => {
   const dispatch = useDispatch();
   const { collapsed } = useSelector((state) => state.main);
-  const profile = window.localStorage.getItem("name");
+  //const profile = window.localStorage.getItem("name"); 
   const {
     token: { borderRadiusLG },
   } = theme.useToken();
@@ -144,7 +145,7 @@ const MainLayout = ({
       "user_management", 
       "User management", 
       "user_management", 
-      <UserOutlined />)
+      <IdcardOutlined />)
   ];
 
   return (

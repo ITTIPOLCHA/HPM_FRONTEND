@@ -59,7 +59,8 @@
       "upload": "Upload",
       "remove": "Remove",
       "index": "No.",
-      "announce": "Announce"
+      "announce": "Announce",
+      "back": "Back"
     },
     "action": {
       "action": "Action",
@@ -204,7 +205,7 @@
       "header": "Home",
       "label": {
         "loading": "Loading ",
-        "card_zero": "Don't forget to download it again. : ",
+        "card_zero": "Data Deletion in : ",
         "card_one": "Overview of the pressure measurement system.",
         "card_one_date": "As of : ",
         "card_one_time": "when : ",

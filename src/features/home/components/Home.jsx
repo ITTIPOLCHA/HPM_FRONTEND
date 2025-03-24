@@ -46,18 +46,24 @@ function Home({
                     style={
                       {
                         display: "flex", 
-                        flexWrap: "wrap", 
+                        flexWrap: "wrap",
                       }
                     }
                   >
-                    {t("home.label.card_one_date")}
-                    <span className={`${styles.blue_text}`}>{currentDate}</span>
-                    {t("home.label.card_one_time")}
-                    <span className={`${styles.blue_text}`}>{currentTime}</span>
-                    {t("home.label.card_zero")}
-                    <span className={`${styles.blue_text}`}>
-                      {daysUntilNextMonth} {t("home.unit.day")}
-                    </span>
+                    <div style={{display: "flex"}}>
+                      {t("home.label.card_one_date")}
+                      <span className={`${styles.blue_text}`}>{currentDate}</span>
+                    </div>
+                    <div>
+                      {t("home.label.card_one_time")}
+                      <span className={`${styles.blue_text}`}>{currentTime}</span>
+                    </div>
+                    <div>
+                      {t("home.label.card_zero")}
+                      <span className={`${styles.blue_text}`}>
+                        {daysUntilNextMonth} {t("home.unit.day")}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </>
@@ -140,30 +146,40 @@ function Home({
                 {currentDate && (
                   <div className={styles.header_mini_last}>
                     <div
-                      className={`${styles.icon_and_text_container} ${styles.align_right}`}
+                      className={`${styles.icon_and_text_container}`}
                     >
                       {t("home.label.card_seven_one")}
-                      <span className={styles.right_aligned_text}>
+                      
+                    </div>
+                    <div
+                      className={`${styles.icon_and_text_container}`}
+                      style={{display: "flex", alignItems: "start",}}
+                    >
+                      <span style={{display: "flex", textAlign: "start", gap: "2px", flexWrap: "wrap"}}>
+                        <span>{t("home.label.card_seven_two")}{" "}</span>
+                        <span>
+                          {states.bloodPressureCurrent?.createBy?.firstName}{" "}
+                          {states.bloodPressureCurrent?.createBy?.lastName}
+                        </span>
+                        <span>
+                          ({states.bloodPressureCurrent?.createBy?.hospitalNumber})
+                        </span>
+                      </span>
+                    </div>
+                    <div
+                      className={`${styles.icon_and_text_container}`}
+                      style={{display: "flex", flexDirection: "column", alignItems: "start"}}
+                    >
+
+                      <span>
                         sys : {states.bloodPressureCurrent?.systolicPressure}
                       </span>
-                    </div>
-                    <div
-                      className={`${styles.icon_and_text_container} ${styles.align_right}`}
-                    >
-                      <span className={styles.right_aligned_text}>
+
+                      <span>
                         dia : {states.bloodPressureCurrent?.diastolicPressure}
                       </span>
-                    </div>
-                    <div
-                      className={`${styles.icon_and_text_container} ${styles.align_right}`}
-                    >
-                      {t("home.label.card_seven_two")}{" "}
-                      {states.bloodPressureCurrent?.createBy?.firstName}{" "}
-                      {states.bloodPressureCurrent?.createBy?.lastName}
-                      {" ( "}
-                      {states.bloodPressureCurrent?.createBy?.hospitalNumber}
-                      {" )"}
-                      <span className={styles.right_aligned_text}>
+
+                      <span>
                         pul : {states.bloodPressureCurrent?.pulseRate}
                       </span>
                     </div>

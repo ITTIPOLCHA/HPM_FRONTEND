@@ -59,7 +59,8 @@
       "upload": "อัพโหลด",
       "remove": "นำออก",
       "index": "ลำดับ",
-      "announce": "ประกาศ"
+      "announce": "ประกาศ",
+      "back": "ย้อนกลับ"
     },
     "action": {
       "action": "จัดการ",

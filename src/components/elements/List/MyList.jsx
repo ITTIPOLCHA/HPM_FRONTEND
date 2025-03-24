@@ -88,17 +88,21 @@ const MyList = ({ height = "", data = [], totalDataCount, boolean, onCheckboxCha
                     style={{ marginLeft: "1rem" }}
                   />
                 }
-                title={
-                  <div style={{ color: getColorBOrW(boolean), marginLeft: 0 }}>
-                    {item.firstName} {item.lastName} ( {item.hospitalNumber} )
-                  </div>
-                }
               />
-              <div style={{ color: getColorBOrW(boolean), marginRight: "1rem" }}>
-                {item.phoneNumber}{" | "}
+              <div style={{width: "100%", display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap"}}>
+              <div style={{ color: getColorBOrW(boolean), marginLeft: 0, display: "flex", flexWrap: "wrap", gap: "0.5rem", marginRight: "2px" }}>
+                    <span>{item.firstName} {item.lastName}</span> 
+                    <span>{`(`+item.hospitalNumber+`)`}</span>
+                  </div>
+              <div style={{ color: getColorBOrW(boolean), marginRight: "1rem", display: "flex", flexWrap: "wrap", gap: "2px" }}>
+                <span>{item.phoneNumber}</span>
+                <span>
+                |
                 <Checkbox checked={item.verified}
                   onChange={() => onCheckboxChange(!item.verified, item.id)}
                 />
+                </span>
+              </div>
               </div>
             </List.Item>
           )}

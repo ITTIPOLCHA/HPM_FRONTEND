@@ -53,7 +53,7 @@ const BloodPressureEdit = ({
                         type="secondary"
                         onClick={() => navigate("/blood_pressure")}
                       >
-                        {t("common.cancel").toUpperCase()}
+                        {t("common.back").toUpperCase()}
                       </Button>
                       <Button htmlType="submit" disabled={isLoading}>
                         {t("common.save").toUpperCase()}

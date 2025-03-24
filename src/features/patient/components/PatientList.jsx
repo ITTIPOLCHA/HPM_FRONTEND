@@ -4,7 +4,7 @@ import { Button, CardContainer } from "components/elements";
 import { MainLayout } from "components/layouts";
 import PatientTable from "components/table/PatientTable";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/PatientList.module.css";
 import FilterSection from "./PatientFitter";
 
@@ -21,6 +21,15 @@ const PatientList = ({
 }) => {
   const { t } = useTranslation();
   const [showFilterForm, setShowFilterForm] = useState(false);
+  const [tableWidth, setTableWidth] = useState(window.innerWidth > 1000 ? window.innerWidth - 56 - 213.83 : window.innerWidth - 56)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setTableWidth(window.innerWidth > 1000 ? window.innerWidth - 56 - 213.83 : window.innerWidth - 56);
+    };
+
+    window.addEventListener("resize", handleResize);
+  }, [tableWidth])
 
   return (
     <MainLayout
@@ -47,7 +56,7 @@ const PatientList = ({
           onClear={onClear}
           initialValues={filter}
         />
-        <CardContainer width="100%" height="fit-content">
+        <CardContainer width={`${tableWidth}px`} height="fit-content">
           <PatientTable
             dataSource={patientList}
             onDelete={onDelete}

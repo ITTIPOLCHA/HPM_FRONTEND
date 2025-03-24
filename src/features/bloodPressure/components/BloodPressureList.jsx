@@ -3,7 +3,7 @@ import { Row, Space } from "antd";
 import { Button, CardContainer } from "components/elements";
 import { MainLayout } from "components/layouts";
 import BloodPressureTable from "components/table/BloodPressureTable";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import styles from "../styles/BloodPressureList.module.css";
@@ -29,6 +29,17 @@ const BloodPressureList = ({
   const userDropDownHn = useSelector(
     (state) => state.bloodPressure.userDropDownHn
   );
+  const [tableWidth, setTableWidth] = useState(window.innerWidth > 1000 ? window.innerWidth - 56 - 213.83 : window.innerWidth - 56)
+  
+  useEffect(() => {
+      const handleResize = () => {
+        setTableWidth(window.innerWidth > 1000 ? window.innerWidth - 56 - 213.83 : window.innerWidth - 56);
+      };
+  
+      window.addEventListener("resize", handleResize);
+      console.log(tableWidth);
+      
+  }, [tableWidth])
 
   return (
     <MainLayout
@@ -64,7 +75,7 @@ const BloodPressureList = ({
           userDropDownHn={userDropDownHn}
           initialValues={filter}
         />
-        <CardContainer width="100%" height="fit-content">
+        <CardContainer width={`${tableWidth}px`} height="fit-content">
           <BloodPressureTable
             dataSource={bloodPressureList}
             onDelete={onDelete}
