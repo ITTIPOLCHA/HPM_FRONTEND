@@ -142,9 +142,9 @@ const MainLayout = ({
       <HeartOutlined />
     ),
     getItem(
-      "user_management", 
-      "User management", 
-      "user_management", 
+      "user_management",
+      "User management",
+      "user_management",
       <IdcardOutlined />)
   ];
 
@@ -292,7 +292,6 @@ const MainLayout = ({
         <Layout className={cx(styles.container, className)}>
           <Content
             style={{
-              paddingLeft: 10,
               backgroundColor: "#FFFBEB",
               borderRadius: borderRadiusLG,
             }}
@@ -301,9 +300,8 @@ const MainLayout = ({
               className={styles.header_md}
               style={{
                 paddingTop: "10px",
-                paddingLeft: 0,
-                paddingRight: 0,
-                marginLeft: "8px",
+                paddingLeft: "20px",
+                paddingRight: "5px",
                 lineHeight: "20px",
                 borderRadius: borderRadiusLG,
               }}
@@ -322,23 +320,19 @@ const MainLayout = ({
                     <Space justify="right" size={24}>
                       <Notification />
                       <User />
+                      <Button
+                        icon={<MenuOutlined />}
+                        type="text"
+                        onClick={toggleDrawer}
+                      />
                     </Space>
                   </Flex>
-                </Col>
-                <Col span={2}>
-                  <Button
-                    icon={<MenuOutlined />}
-                    type="text"
-                    onClick={toggleDrawer}
-                  />
                 </Col>
               </Row>
             </Header>
             <Content
               className={styles.content}
               style={{
-                margin: "5px 5px",
-                padding: 10,
                 height: "100%",
                 borderRadius: borderRadiusLG,
               }}
@@ -346,8 +340,12 @@ const MainLayout = ({
               <div className={styles.body}>
                 <div
                   style={{
+                    padding: 10,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
                     height: "max-content",
-                    paddingRight: "1vw",
                   }}
                 >
                   {children}

@@ -6,7 +6,7 @@ import ChangePassword from "features/authentication/pages/ChangePassword";
 import ForgotPassword from "features/authentication/pages/ForgotPassword";
 import Login from "features/authentication/pages/Login";
 import ResetPassword from "features/authentication/pages/ResetPassword";
-import SignUp from "features/authentication/pages/SignUp";
+//import SignUp from "features/authentication/pages/SignUp";
 import BloodPressureEdit from "features/bloodPressure/pages/BloodPressureEdit";
 import BloodPressureList from "features/bloodPressure/pages/BloodPressureList";
 import PatientList from "features/patient/pages/PatientList";
@@ -15,7 +15,7 @@ import PatientEdit from "features/patient/pages/PatientEdit";
 import PrivateRoute from "PrivateRoute";
 
 import NotFound from "features/notfound/pages/NotFound";
-import UserManagement from "features/userManagement/components/UserManagement";
+import UserManagement from "features/userManagement/pages/UserManagement";
 
 const router = createBrowserRouter([
   {

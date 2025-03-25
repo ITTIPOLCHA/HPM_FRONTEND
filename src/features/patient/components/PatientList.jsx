@@ -21,11 +21,19 @@ const PatientList = ({
 }) => {
   const { t } = useTranslation();
   const [showFilterForm, setShowFilterForm] = useState(false);
-  const [tableWidth, setTableWidth] = useState(window.innerWidth > 1000 ? window.innerWidth - 56 - 213.83 : window.innerWidth - 56)
+  const [tableWidth, setTableWidth] = useState(
+    window.innerWidth > 1000 ? 
+    document.documentElement.clientWidth - 56 - 213.83 
+    : document.documentElement.clientWidth - 26
+  )
 
   useEffect(() => {
     const handleResize = () => {
-      setTableWidth(window.innerWidth > 1000 ? window.innerWidth - 56 - 213.83 : window.innerWidth - 56);
+      setTableWidth(
+        window.innerWidth > 1000 ? 
+        document.documentElement.clientWidth - 56 - 213.83 
+        : document.documentElement.clientWidth - 26
+      );
     };
 
     window.addEventListener("resize", handleResize);
