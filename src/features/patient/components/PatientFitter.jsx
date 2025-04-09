@@ -25,7 +25,7 @@ const FilterSection = ({
           >
             {({ handleSubmit, resetForm }) => (
               <Form onSubmit={handleSubmit} style={{ padding: "16px" }}>
-                <Row Row gutter={[24, 10]}>
+                <Row gutter={[24, 10]}>
                   <Col xs={24} sm={12} lg={8}>
                     <Input
                       label={t("patient.label.first_name")}
