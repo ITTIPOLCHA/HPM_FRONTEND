@@ -8,6 +8,12 @@ import { useEffect, useState } from "react";
 import styles from "../styles/PatientList.module.css";
 import FilterSection from "./PatientFitter";
 
+function getResponsiveTableWidth() {
+  return window.innerWidth > 1100
+    ? "100%"
+    : `${document.documentElement.clientWidth - 26}px`;
+}
+
 const PatientList = ({
   patientList = [],
   isLoading = false,
@@ -21,23 +27,11 @@ const PatientList = ({
 }) => {
   const { t } = useTranslation();
   const [showFilterForm, setShowFilterForm] = useState(false);
-  const [tableWidth, setTableWidth] = useState(
-    window.innerWidth > 1000 ? 
-    document.documentElement.clientWidth - 56 - 213.83 
-    : document.documentElement.clientWidth - 26
-  )
+  const [tableWidth, setTableWidth] = useState(getResponsiveTableWidth());
 
   useEffect(() => {
-    const handleResize = () => {
-      setTableWidth(
-        window.innerWidth > 1000 ? 
-        document.documentElement.clientWidth - 56 - 213.83 
-        : document.documentElement.clientWidth - 26
-      );
-    };
-
-    window.addEventListener("resize", handleResize);
-  }, [tableWidth])
+    setTableWidth(getResponsiveTableWidth());
+  }, [tableWidth]);
 
   return (
     <MainLayout
@@ -64,7 +58,7 @@ const PatientList = ({
           onClear={onClear}
           initialValues={filter}
         />
-        <CardContainer width={`${tableWidth}px`} height="fit-content">
+        <CardContainer width={tableWidth} height="fit-content">
           <PatientTable
             dataSource={patientList}
             onDelete={onDelete}
