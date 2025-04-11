@@ -30,11 +30,7 @@ const User = () => {
     e.preventDefault();
     Modal.confirm({
       title: "Are you sure?",
-      content: (
-        <>
-          <p>Are you sure logout ?</p>
-        </>
-      ),
+      content: <p>Are you sure logout ?</p>,
       onOk() {
         session.removeAuthToken();
         navigate("/sign_in");
@@ -50,7 +46,7 @@ const User = () => {
         items: [
           {
             key: "0",
-            label: <span style={{fontWeight: "bold" }}>{profile}</span>,
+            label: <span style={{ fontWeight: "bold" }}>{profile}</span>,
           },
           {
             key: "1",
@@ -91,16 +87,14 @@ const User = () => {
           },
           {
             key: "2",
-            label: <a href="/change_password">{t("user.label.change_password")}</a>,
+            label: (
+              <a href="/change_password">{t("user.label.change_password")}</a>
+            ),
             icon: <LockOutlined />,
           },
           {
             key: "3",
-            label:
-              <span onClick={odSignOut}>
-                {t("user.label.sign_out")}
-              </span>
-            ,
+            label: <span onClick={odSignOut}>{t("user.label.sign_out")}</span>,
             icon: <LoginOutlined />,
           },
         ],

@@ -354,7 +354,7 @@ const MainLayout = ({
           </Content>
           <Drawer
             title="Menu"
-            placement="left"
+            placement="right"
             onClose={toggleDrawer}
             open={drawerVisible}
           >

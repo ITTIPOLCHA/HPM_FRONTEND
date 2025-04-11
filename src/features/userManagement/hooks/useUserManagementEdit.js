@@ -5,27 +5,27 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { generateRandomString } from "utils/helper";
-import * as services from "../services/patientApi";
-import { setIsLoading } from "../slices/patientSlice";
+import * as services from "../services/adminApi";
+import { setIsLoading } from "../slices/adminSlice";
 
-function usePatientEdit() {
+function useUserManagementEdit() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.patient.isLoading);
-  const [patient, setPatient] = useState({});
+  const isLoading = useSelector((state) => state.admin.isLoading);
+  const [userManagement, setUserManagement] = useState({});
   const currentId = window.localStorage.getItem("id");
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const getPatient = useCallback(async () => {
+  const getUserManagement = useCallback(async () => {
     try {
       dispatch(setIsLoading(true));
       const values = {
         userId: id,
         requestId: generateRandomString(),
       };
-      const response = await services.getPatientById(values);
-      setPatient(response.data);
+      const response = await services.getAdminById(values);
+      setUserManagement(response.data);
     } catch (error) {
       Alert({ type: "error", resultObject: error });
     } finally {
@@ -40,12 +40,11 @@ function usePatientEdit() {
           title: t("dialog.confirmation.header"),
           content: <p>{t("patient.message.edit")}</p>,
           async onOk() {
-            const response = await services.updateUserById({
+            const response = await services.updateAdminById({
               requestId: generateRandomString(),
               actionId: currentId,
               userId: values.id,
               email: values.email,
-              hospitalNumber: values.hospitalNumber,
               phoneNumber: values.phoneNumber,
               firstName: values.firstName,
               lastName: values.lastName,
@@ -53,7 +52,7 @@ function usePatientEdit() {
             Alert({
               message: response.data.status.details[0].value || "Success",
             });
-            navigate("/patient");
+            navigate("/user_management");
           },
           okText: t("common.confirm"),
           cancelText: t("common.cancel"),
@@ -68,14 +67,14 @@ function usePatientEdit() {
   );
 
   useEffect(() => {
-    getPatient();
-  }, [getPatient]);
+    getUserManagement();
+  }, [getUserManagement]);
 
   return {
-    patient,
+    userManagement,
     isLoading,
     onSubmit,
   };
 }
 
-export default usePatientEdit;
+export default useUserManagementEdit;

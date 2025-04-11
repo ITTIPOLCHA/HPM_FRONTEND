@@ -92,11 +92,7 @@ function usePatientList() {
       try {
         Modal.confirm({
           title: t("dialog.confirmation.header"),
-          content: (
-            <>
-              <p>{t("blood_pressure.message.delete")}</p>
-            </>
-          ),
+          content: <p>{t("blood_pressure.message.delete")}</p>,
           async onOk() {
             const response = await services.deletePatient({
               requestId: generateRandomString(),

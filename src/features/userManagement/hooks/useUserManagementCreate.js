@@ -5,55 +5,34 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { generateRandomString } from "utils/helper";
-import * as services from "../services/patientApi";
-import { setIsLoading } from "../slices/patientSlice";
+import * as services from "../services/adminApi";
+import { setIsLoading } from "../slices/adminSlice";
 
-function usePatientEdit() {
+function useUserManagementCreate() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const isLoading = useSelector((state) => state.patient.isLoading);
-  const [patient, setPatient] = useState({});
-  const currentId = window.localStorage.getItem("id");
-  const { id } = useParams();
+  const isLoading = useSelector((state) => state.admin.isLoading);
   const navigate = useNavigate();
-
-  const getPatient = useCallback(async () => {
-    try {
-      dispatch(setIsLoading(true));
-      const values = {
-        userId: id,
-        requestId: generateRandomString(),
-      };
-      const response = await services.getPatientById(values);
-      setPatient(response.data);
-    } catch (error) {
-      Alert({ type: "error", resultObject: error });
-    } finally {
-      dispatch(setIsLoading(false));
-    }
-  }, [id, dispatch]);
 
   const onSubmit = useCallback(
     async (values) => {
       try {
         Modal.confirm({
           title: t("dialog.confirmation.header"),
-          content: <p>{t("patient.message.edit")}</p>,
+          content: <p>{t("admin.message.create")}</p>,
           async onOk() {
-            const response = await services.updateUserById({
+            const response = await services.createAdmin({
               requestId: generateRandomString(),
-              actionId: currentId,
-              userId: values.id,
               email: values.email,
-              hospitalNumber: values.hospitalNumber,
               phoneNumber: values.phoneNumber,
               firstName: values.firstName,
               lastName: values.lastName,
+              password: values.password,
             });
             Alert({
               message: response.data.status.details[0].value || "Success",
             });
-            navigate("/patient");
+            navigate("/user_management");
           },
           okText: t("common.confirm"),
           cancelText: t("common.cancel"),
@@ -67,15 +46,10 @@ function usePatientEdit() {
     [dispatch, t]
   );
 
-  useEffect(() => {
-    getPatient();
-  }, [getPatient]);
-
   return {
-    patient,
     isLoading,
     onSubmit,
   };
 }
 
-export default usePatientEdit;
+export default useUserManagementCreate;

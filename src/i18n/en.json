@@ -86,8 +86,13 @@
       "header": "Patient",
       "info": "Patient Information",
       "edit":"Edit Patient",
+      "message": {
+        "edit":"Are you sure to edit this user ?",
+        "delete": "Are you sure to delete this user ?"
+      },
       "label": {
         "patient_information": "Patient Information",
+        "admin_information": "Admin Information",
         "patient_id": "No.",
         "hn": "HN.",
         "email": "E-mail",
@@ -105,6 +110,37 @@
         "updateDate": "Update Date",
         "role": "Role",
         "status_flag": "Status Flag"
+      }
+    },
+    "admin":{
+      "entity": "admin",
+      "header": "Admin",
+      "info": "Admin Information",
+      "edit":"Edit Admin",
+      "create":"Create Admin",
+      "message": {
+        "create":"Are you sure to create this user ?",
+        "edit":"Are you sure to edit this user ?",
+        "delete": "Are you sure to delete this user ?"
+      },
+      "label": {
+        "admin_information": "Admin Information",
+        "admin_id": "No.",
+        "hn": "HN.",
+        "email": "E-mail",
+        "full_name": "Full Name",
+        "phone": "Phone Number",
+        "status": "Status",
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "line_name": "Line Name",
+        "level": "Level",
+        "checkState": "Check State",
+        "createBy": "Create By",
+        "createDate": "Create Date",
+        "updateBy": "Update By",
+        "updateDate": "Update Date",
+        "password": "Password"
       }
     },
     "sign_up": {

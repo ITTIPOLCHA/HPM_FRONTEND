@@ -8,12 +8,12 @@ import { Button } from "components/elements";
 
 import { MainLayout } from "components/layouts";
 import { useNavigate } from "react-router-dom";
-import schema from "../schemas/patientEditSchema";
-import styles from "../styles/PatientList.module.css";
+import schema from "../schemas/userManagementEditSchema";
+import styles from "../styles/UserManagement.module.css";
 
-const PatientEdit = ({
+const UserManagementEdit = ({
   isLoading = false,
-  patient = {},
+  userManagement = {},
   onSubmit = () => {},
 }) => {
   const navigate = useNavigate();
@@ -21,16 +21,16 @@ const PatientEdit = ({
 
   return (
     <MainLayout
-      title={t("patient.edit")}
+      title={t("admin.edit")}
       breadcrumb={[
         { title: t("home.header"), link: "/" },
-        { title: t("patient.header"), link: "/patient" },
+        { title: t("admin.header"), link: "/user_management" },
       ]}
     >
       <div className={styles.container}>
         <Formik
           initialValues={{
-            ...patient,
+            ...userManagement,
           }}
           enableReinitialize
           onSubmit={onSubmit}
@@ -48,7 +48,7 @@ const PatientEdit = ({
                     <Space size={20}>
                       <Button
                         type="secondary"
-                        onClick={() => navigate("/patient")}
+                        onClick={() => navigate("/user_management")}
                       >
                         {t("common.cancel").toUpperCase()}
                       </Button>
@@ -68,23 +68,11 @@ const PatientEdit = ({
                           <Col span={24}>
                             <h1>
                               <b className={styles.infoTopic}>
-                                {t("patient.label.patient_information")}
+                                {t("patient.label.admin_information")}
                               </b>
                             </h1>
                           </Col>
                           <Divider />
-                          <Col xs={24} md={12}>
-                            <Input
-                              required={true}
-                              name="hospitalNumber"
-                              label=<b className={styles.infoTopic}>
-                                {t("patient.label.hn")}
-                              </b>
-                              placeholder=""
-                              size="large"
-                            />
-                          </Col>
-                          <Col xs={0} md={12} />
                           <Col xs={24} md={12}>
                             <Input
                               required={true}
@@ -143,4 +131,4 @@ const PatientEdit = ({
   );
 };
 
-export default PatientEdit;
+export default UserManagementEdit;
