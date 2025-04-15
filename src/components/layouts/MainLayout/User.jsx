@@ -88,7 +88,9 @@ const User = () => {
           {
             key: "2",
             label: (
-              <a href="/change_password">{t("user.label.change_password")}</a>
+              <span onClick={() => navigate("/change_password")}>
+                {t("user.label.change_password")}
+              </span>
             ),
             icon: <LockOutlined />,
           },

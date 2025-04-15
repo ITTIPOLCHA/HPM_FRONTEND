@@ -234,7 +234,7 @@
     },
     "change_password": {
       "header": "Change password",
-      "sub_Header": "Password must contain at least 8 characters, including uppercase (A-Z), lowercase (a-z) digit (0-9) and special character (!,#,$,...)"
+      "sub_Header": "Password must contain at least 8 characters."
     },
     "home": {
       "entity": "home",
