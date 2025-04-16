@@ -13,6 +13,7 @@ import {
   setUserDropDownNameHn,
 } from "../slices/bloodPressureSlice";
 import moment from "moment";
+import axios from "axios";
 
 function toParams(params = {}) {
   const { pagination = {}, sortBy = [] } = params;
@@ -190,6 +191,7 @@ function useBloodPressureList() {
       setIsDownloading(true);
       const response = await services.exportExcel();
 
+      console.log(response.data);
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;
