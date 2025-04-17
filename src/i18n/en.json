@@ -249,7 +249,19 @@
     },
     "user_management": {
       "entity": "User management",
-      "header": "User Management"
+      "header": "User Management",
+      "add": "Add User",
+      "edit": "Edit User",
+      "message": {
+        "edit":"Are you sure to edit your information?"
+      },
+      "label": {
+        "record_no": "No.",
+        "name": "Name",
+        "email": "E-mail",
+        "tel": "Phone Number",
+        "createBy": "Create By"
+      }
     }
   }
 }

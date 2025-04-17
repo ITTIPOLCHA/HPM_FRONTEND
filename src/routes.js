@@ -15,7 +15,7 @@ import PatientEdit from "features/patient/pages/PatientEdit";
 import PrivateRoute from "PrivateRoute";
 
 import NotFound from "features/notfound/pages/NotFound";
-import UserManagement from "features/userManagement/pages/UserManagement";
+import UserManagementList from "features/userManagement/pages/UserManagementList";
 
 const router = createBrowserRouter([
   {
@@ -65,7 +65,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/user_management",
-    element: <PrivateRoute element={<UserManagement />}/>
+    element: <PrivateRoute element={<UserManagementList />}/>
   }
 ]);
 
