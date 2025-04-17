@@ -6,7 +6,7 @@ import {
   MenuOutlined,
   RightOutlined,
   UserOutlined,
-  IdcardOutlined
+  IdcardOutlined,
 } from "@ant-design/icons";
 import {
   Alert,
@@ -48,30 +48,28 @@ const MainLayout = ({
 }) => {
   const dispatch = useDispatch();
   const { collapsed } = useSelector((state) => state.main);
-  //const profile = window.localStorage.getItem("name"); 
   const {
     token: { borderRadiusLG },
   } = theme.useToken();
   const { t } = useTranslation();
-  const location = useLocation();
   const navigate = useNavigate();
-  const [selectedKeys, setSelectedKeys] = useState(["home"]);
-  const [openKeys, setOpenKeys] = useState(["home"]);
+  const location = useLocation();
   const screens = useBreakpoint();
 
+  const [selectedKeys, setSelectedKeys] = useState(["home"]);
+  const [openKeys, setOpenKeys] = useState(["home"]);
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   const toggleDrawer = () => setDrawerVisible(!drawerVisible);
 
   const getState = useCallback(async () => {
     try {
-      const values = {
+      const res = await services.getState({
         requestId: generateRandomString(),
-      };
-      const response = await services.getState(values);
-      dispatch(setState(response.data));
-    } catch (error) {
-      Alert({ type: "error", resultObject: error });
+      });
+      dispatch(setState(res.data));
+    } catch (err) {
+      Alert({ type: "error", resultObject: err });
     }
   }, [dispatch]);
 
@@ -91,7 +89,7 @@ const MainLayout = ({
     });
   }
 
-  useMemo(() => {
+  useEffect(() => {
     const pathname = location.pathname;
     if (pathname === "/") {
       setSelectedKeys(["home"]);
@@ -145,12 +143,13 @@ const MainLayout = ({
       "user_management",
       "User management",
       "user_management",
-      <IdcardOutlined />)
+      <IdcardOutlined />
+    ),
   ];
 
   return (
     <>
-      {screens.lg ? (
+      {screens.xl ? (
         <Layout className={cx(styles.container, className)} hasSider={true}>
           <Sider
             width="27vh"
@@ -355,7 +354,7 @@ const MainLayout = ({
           </Content>
           <Drawer
             title="Menu"
-            placement="left"
+            placement="right"
             onClose={toggleDrawer}
             open={drawerVisible}
           >

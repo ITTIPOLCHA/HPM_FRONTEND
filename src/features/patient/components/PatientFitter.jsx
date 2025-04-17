@@ -25,102 +25,71 @@ const FilterSection = ({
           >
             {({ handleSubmit, resetForm }) => (
               <Form onSubmit={handleSubmit} style={{ padding: "16px" }}>
-                <Row gutter={24} style={{ paddingBottom: "10px" }}>
-                  <Col
-                    span={6}
-                    style={{
-                      marginBottom: "10px",
-                    }}
-                  >
+                <Row gutter={[24, 10]}>
+                  <Col xs={24} sm={12} lg={8}>
                     <Input
                       label={t("patient.label.first_name")}
                       name="firstName"
                       size="large"
                     />
                   </Col>
-                  <Col
-                    span={6}
-                    style={{
-                      marginBottom: "10px",
-                    }}
-                  >
+                  <Col xs={24} sm={12} lg={8}>
                     <Input
                       label={t("patient.label.last_name")}
                       name="lastName"
                       size="large"
                     />
                   </Col>
-                  <Col span={12}/>
-                  <Col
-                    span={6}
-                    style={{
-                      marginBottom: "10px",
-                    }}
-                  >
+                  <Col xs={24} sm={12} lg={8}>
                     <Input
                       label={t("patient.label.email")}
                       name="email"
                       size="large"
                     />
                   </Col>
-                  <Col
-                    span={6}
-                    style={{
-                      marginBottom: "10px",
-                    }}
-                  >
+                  <Col xs={24} sm={12} lg={8}>
                     <Input
                       label={t("patient.label.phone")}
                       name="phoneNumber"
                       size="large"
                     />
                   </Col>
-                  <Col
-                    span={6}
-                    style={{
-                      marginBottom: "10px",
-                    }}
-                  >
+                  <Col xs={24} sm={12} lg={8}>
                     <Input
                       label={t("patient.label.hn")}
                       name="hospitalNumber"
                       size="large"
                     />
                   </Col>
-                  <Col
-                    span={6}
-                    style={{
-                      marginBottom: "10px",
-                    }}
-                  >
+                  <Col xs={24} sm={12} lg={8}>
                     <Select
                       name="statusFlag"
                       label={t("patient.label.status")}
                       placeholder="select status..."
                       size="large"
-                      options={
-                        [
-                          { label: "Active", value: "ACTIVE" },
-                          { label: "Inactive", value: "INACTIVE" },
-                        ] || []
-                      }
+                      options={[
+                        { label: "Active", value: "ACTIVE" },
+                        { label: "Inactive", value: "INACTIVE" },
+                      ]}
                     />
                   </Col>
+                  <Col xs={24}>
+                    <Space direction="horizontal" size={16}>
+                      <Button type="primary" htmlType="submit">
+                        {t("common.confirm")}
+                      </Button>
+                      <Button
+                        type="default"
+                        onClick={() => {
+                          resetForm();
+                          onClear();
+                        }}
+                      >
+                        {t("common.clear")}
+                      </Button>
+                    </Space>
+                  </Col>
                 </Row>
-                <Space>
-                  <Button type="primary" htmlType="submit">
-                    {t("common.confirm")}
-                  </Button>
-                  <Button
-                    type="default"
-                    onClick={() => {
-                      resetForm();
-                      onClear();
-                    }}
-                  >
-                    {t("common.clear")}
-                  </Button>
-                </Space>
               </Form>
             )}
           </Formik>

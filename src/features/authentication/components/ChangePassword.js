@@ -20,7 +20,7 @@ const ChangePassword = ({
           <Translation>{(t) => t("change_password.header")}</Translation>
         </p>
         <p className={styles.subHeader}>
-          <Translation>{(t) => t("change_password.sub_header")}</Translation>
+          <Translation>{(t) => t("change_password.sub_Header")}</Translation>
         </p>
         <Formik
           initialValues={initialValues}

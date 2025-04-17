@@ -14,7 +14,7 @@ import styles from "../styles/PatientList.module.css";
 const PatientEdit = ({
   isLoading = false,
   patient = {},
-  onSubmit = () => { },
+  onSubmit = () => {},
 }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -68,55 +68,63 @@ const PatientEdit = ({
                           <Col span={24}>
                             <h1>
                               <b className={styles.infoTopic}>
-                                {t(
-                                  "patient.label.patient_information"
-                                )}
+                                {t("patient.label.patient_information")}
                               </b>
                             </h1>
                           </Col>
                           <Divider />
-                          <Col span={12}>
+                          <Col xs={24} md={12}>
                             <Input
                               required={true}
                               name="hospitalNumber"
-                              label=<b className={styles.infoTopic}>{t("patient.label.hn")}</b>
+                              label=<b className={styles.infoTopic}>
+                                {t("patient.label.hn")}
+                              </b>
                               placeholder=""
                               size="large"
                             />
                           </Col>
-                          <Col span={12} />
-                          <Col span={12}>
+                          <Col xs={0} md={12} />
+                          <Col xs={24} md={12}>
                             <Input
                               required={true}
                               name="firstName"
-                              label=<b className={styles.infoTopic}>{t("patient.label.first_name")}</b>
+                              label=<b className={styles.infoTopic}>
+                                {t("patient.label.first_name")}
+                              </b>
                               placeholder=""
                               size="large"
                             />
                           </Col>
-                          <Col span={12}>
+                          <Col xs={24} md={12}>
                             <Input
                               required={true}
                               name="lastName"
-                              label=<b className={styles.infoTopic}>{t("patient.label.last_name")}</b>
+                              label=<b className={styles.infoTopic}>
+                                {t("patient.label.last_name")}
+                              </b>
                               placeholder=""
                               size="large"
                             />
                           </Col>
-                          <Col span={12}>
+                          <Col xs={24} md={12}>
                             <Input
                               required={true}
                               name="email"
-                              label=<b className={styles.infoTopic}>{t("patient.label.email")}</b>
+                              label=<b className={styles.infoTopic}>
+                                {t("patient.label.email")}
+                              </b>
                               placeholder=""
                               size="large"
                             />
                           </Col>
-                          <Col span={12}>
+                          <Col xs={24} md={12}>
                             <Input
                               required={true}
                               name="phoneNumber"
-                              label=<b className={styles.infoTopic}>{t("patient.label.phone")}</b>
+                              label=<b className={styles.infoTopic}>
+                                {t("patient.label.phone")}
+                              </b>
                               placeholder=""
                               size="large"
                             />

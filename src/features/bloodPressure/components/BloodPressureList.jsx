@@ -9,6 +9,12 @@ import { useSelector } from "react-redux";
 import styles from "../styles/BloodPressureList.module.css";
 import FilterSection from "./BloodPressureFitter";
 
+function getResponsiveTableWidth() {
+  return window.innerWidth > 1100
+    ? "100%"
+    : `${document.documentElement.clientWidth - 26}px`;
+}
+
 const BloodPressureList = ({
   bloodPressureList = [],
   isLoading = false,
@@ -29,23 +35,11 @@ const BloodPressureList = ({
   const userDropDownHn = useSelector(
     (state) => state.bloodPressure.userDropDownHn
   );
-  const [tableWidth, setTableWidth] = useState(
-    window.innerWidth > 1000 ? 
-    document.documentElement.clientWidth - 56 - 213.83 
-    : document.documentElement.clientWidth - 26
-  )
+  const [tableWidth, setTableWidth] = useState(getResponsiveTableWidth());
 
   useEffect(() => {
-    const handleResize = () => {
-      setTableWidth(
-        window.innerWidth > 1000 ? 
-        document.documentElement.clientWidth - 56 - 213.83 
-        : document.documentElement.clientWidth - 26
-      );
-    };
-
-    window.addEventListener("resize", handleResize);
-  }, [tableWidth])
+      setTableWidth(getResponsiveTableWidth());
+  }, [tableWidth]);
 
   return (
     <MainLayout
@@ -81,7 +75,7 @@ const BloodPressureList = ({
           userDropDownHn={userDropDownHn}
           initialValues={filter}
         />
-        <CardContainer width={`${tableWidth}px`} height="fit-content">
+        <CardContainer width={tableWidth} height="fit-content">
           <BloodPressureTable
             dataSource={bloodPressureList}
             onDelete={onDelete}

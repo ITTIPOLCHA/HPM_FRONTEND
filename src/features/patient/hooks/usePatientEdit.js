@@ -17,35 +17,28 @@ function usePatientEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const getPatient = useCallback(
-    async () => {
-      try {
-        dispatch(setIsLoading(true));
-        const values = {
-          userId: id,
-          requestId: generateRandomString(),
-        };
-        const response = await services.getPatientById(values);
-        setPatient(response.data);
-      } catch (error) {
-        Alert({ type: "error", resultObject: error });
-      } finally {
-        dispatch(setIsLoading(false));
-      }
-    },
-    [id, dispatch]
-  );
+  const getPatient = useCallback(async () => {
+    try {
+      dispatch(setIsLoading(true));
+      const values = {
+        userId: id,
+        requestId: generateRandomString(),
+      };
+      const response = await services.getPatientById(values);
+      setPatient(response.data);
+    } catch (error) {
+      Alert({ type: "error", resultObject: error });
+    } finally {
+      dispatch(setIsLoading(false));
+    }
+  }, [id, dispatch]);
 
   const onSubmit = useCallback(
     async (values) => {
       try {
         Modal.confirm({
           title: t("dialog.confirmation.header"),
-          content: (
-            <>
-              <p>{t("blood_pressure.message.edit")}</p>
-            </>
-          ),
+          content: <p>{t("patient.message.edit")}</p>,
           async onOk() {
             const response = await services.updateUserById({
               requestId: generateRandomString(),
@@ -57,7 +50,9 @@ function usePatientEdit() {
               firstName: values.firstName,
               lastName: values.lastName,
             });
-            Alert({ message: response.data.status.details[0].value || "Success" });
+            Alert({
+              message: response.data.status.details[0].value || "Success",
+            });
             navigate("/patient");
           },
           okText: t("common.confirm"),
