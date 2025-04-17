@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { generateRandomString } from "utils/helper";
 import * as services from "../services/adminApi";
 import { setIsLoading, setAdminList } from "../slices/adminSlice";
+import session from "utils/session";
+import { useNavigate } from "react-router-dom";
 
 function toParams(params = {}) {
   const { pagination = {}, sortBy = [] } = params;
@@ -26,6 +28,7 @@ function toParams(params = {}) {
 function useUserManagement() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isLoading = useSelector((state) => state.admin.isLoading);
   const adminList = useSelector((state) => state.admin.adminList);
   const currentId = window.localStorage.getItem("id");
@@ -101,6 +104,10 @@ function useUserManagement() {
             alert({
               message: response.data.status.details[0].value || "Success",
             });
+            if (currentId === values) {
+              session.removeAuthToken();
+              navigate("/sign_in");
+            }
             getAdminList({
               pagination: { page: pagination.page, size: pagination.size },
             });
@@ -114,7 +121,7 @@ function useUserManagement() {
         dispatch(setIsLoading(false));
       }
     },
-    [dispatch, getAdminList, pagination.page, pagination.size, t]
+    [dispatch, getAdminList, pagination.page, pagination.size, t, currentId, navigate]
   );
 
   useEffect(() => {
