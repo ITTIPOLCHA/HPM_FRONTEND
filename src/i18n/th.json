@@ -112,7 +112,9 @@
         "role": "บทบาท",
         "status_flag": "สถานะ",
         "age": "อายุ",
-        "gender": "เพศ"
+        "gender": "เพศ",
+        "male": "ชาย",
+        "female": "หญิง"
       }
     },
     "admin":{

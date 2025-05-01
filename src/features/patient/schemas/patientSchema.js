@@ -7,6 +7,8 @@ export const initialValues = {
   phone: null,
   hn: null,
   statusFlag: null,
+  gender: null,
+  age: [1, 120],
 };
 
 const PatientSchema = Yup.object().shape({

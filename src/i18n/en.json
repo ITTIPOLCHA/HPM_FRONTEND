@@ -111,7 +111,9 @@
         "role": "Role",
         "status_flag": "Status Flag",
         "age": "Age",
-        "gender": "Gender"
+        "gender": "Gender",
+        "male": "Male",
+        "female": "Female"
       }
     },
     "admin":{

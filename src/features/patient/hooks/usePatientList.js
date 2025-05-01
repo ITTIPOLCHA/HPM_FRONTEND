@@ -30,7 +30,7 @@ function usePatientList() {
   const patientList = useSelector((state) => state.patient.patientList);
   const currentId = window.localStorage.getItem("id");
   const [pagination, setPagination] = useState({ page: 0, size: 10 });
-  const [filter, setFilter] = useState({});
+  const [filter, setFilter] = useState({age: [1, 120]});
 
   const getPatientList = useCallback(
     async (params = {}) => {
@@ -82,10 +82,20 @@ function usePatientList() {
 
   const handleOnSubmit = useCallback(
     (values) => {
-      setFilter(values);
+      const [ageFrom, ageTo] = values.age || [];
+  
+      const filter = {
+        ...values,
+        ageFrom,
+        ageTo,
+      };
+  
+      delete filter.age; // ลบ age เดิมที่เป็น array
+  
+      setFilter(filter);
     },
     [setFilter]
-  );
+  );  
 
   const handleOnDelete = useCallback(
     async (values) => {
@@ -151,7 +161,7 @@ function usePatientList() {
     filter,
     onChange: handleOnChange,
     onSubmit: handleOnSubmit,
-    onClear: () => setFilter({}),
+    onClear: () => setFilter({age: [1, 120]}),
     onDelete: handleOnDelete,
     onCheckboxChange: handleOnCheckboxChange,
   };

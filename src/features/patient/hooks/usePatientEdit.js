@@ -49,6 +49,8 @@ function usePatientEdit() {
               phoneNumber: values.phoneNumber,
               firstName: values.firstName,
               lastName: values.lastName,
+              gender: values.gender,
+              age: values.age,
             });
             Alert({
               message: response.data.status.details[0].value || "Success",

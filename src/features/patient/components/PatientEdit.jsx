@@ -1,5 +1,5 @@
 import { Col, Divider, Row, Space, Spin } from "antd";
-import { Input } from "components/form";
+import { Input, InputNumber, Select } from "components/form";
 import { Form, Formik } from "formik";
 
 import { useTranslation } from "react-i18next";
@@ -124,6 +124,30 @@ const PatientEdit = ({
                               name="phoneNumber"
                               label=<b className={styles.infoTopic}>
                                 {t("patient.label.phone")}
+                              </b>
+                              placeholder=""
+                              size="large"
+                            />
+                          </Col>
+                          <Col xs={24} md={12}>
+                            <Select
+                              required={true}
+                              name="gender"
+                              label=<b className={styles.infoTopic}>{t("patient.label.gender")}</b>
+                              placeholder="select gender..."
+                              size="large"
+                              options={[
+                                { label: "ผู้ชาย", value: "male" },
+                                { label: "ผู้หญิง", value: "female" },
+                              ]}
+                            />
+                          </Col>
+                          <Col xs={24} md={12}>
+                            <InputNumber
+                              required={true}
+                              name="age"
+                              label=<b className={styles.infoTopic}>
+                                {t("patient.label.age")}
                               </b>
                               placeholder=""
                               size="large"

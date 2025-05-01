@@ -1,7 +1,7 @@
-import { Col, Row, Space } from "antd";
+import { Col, Row, Slider, Space } from "antd";
 import { Button, CardContainer } from "components/elements";
 import { Input, Select } from "components/form";
-import { Formik } from "formik";
+import { Formik, FormikConsumer } from "formik";
 import { useTranslation } from "react-i18next";
 import { Form } from "react-router-dom";
 import schema from "../schemas/patientSchema";
@@ -26,42 +26,42 @@ const FilterSection = ({
             {({ handleSubmit, resetForm }) => (
               <Form onSubmit={handleSubmit} style={{ padding: "16px" }}>
                 <Row gutter={[24, 10]}>
-                  <Col xs={24} sm={12} lg={8}>
+                  <Col xs={24} sm={12} lg={6}>
                     <Input
                       label={t("patient.label.first_name")}
                       name="firstName"
                       size="large"
                     />
                   </Col>
-                  <Col xs={24} sm={12} lg={8}>
+                  <Col xs={24} sm={12} lg={6}>
                     <Input
                       label={t("patient.label.last_name")}
                       name="lastName"
                       size="large"
                     />
                   </Col>
-                  <Col xs={24} sm={12} lg={8}>
+                  <Col xs={24} sm={12} lg={6}>
                     <Input
                       label={t("patient.label.email")}
                       name="email"
                       size="large"
                     />
                   </Col>
-                  <Col xs={24} sm={12} lg={8}>
+                  <Col xs={24} sm={12} lg={6}>
                     <Input
                       label={t("patient.label.phone")}
                       name="phoneNumber"
                       size="large"
                     />
                   </Col>
-                  <Col xs={24} sm={12} lg={8}>
+                  <Col xs={24} sm={12} lg={4}>
                     <Input
                       label={t("patient.label.hn")}
                       name="hospitalNumber"
                       size="large"
                     />
                   </Col>
-                  <Col xs={24} sm={12} lg={8}>
+                  <Col xs={24} sm={12} lg={4}>
                     <Select
                       name="statusFlag"
                       label={t("patient.label.status")}
@@ -72,6 +72,33 @@ const FilterSection = ({
                         { label: "Inactive", value: "INACTIVE" },
                       ]}
                     />
+                  </Col>
+                  <Col xs={24} sm={12} lg={4}>
+                    <Select
+                      name="gender"
+                      label={t("patient.label.gender")}
+                      placeholder="select gender..."
+                      size="large"
+                      options={[
+                        { label: "ผู้ชาย", value: "male" },
+                        { label: "ผู้หญิง", value: "female" },
+                      ]}
+                    />
+                  </Col>
+                  <Col xs={24} sm={12}>
+                    <label>{t("patient.label.age")}</label>
+                    <FormikConsumer>
+                      {({ values, setFieldValue }) => (
+                        <Slider
+                          range
+                          min={1}
+                          max={100}
+                          step={1}
+                          value={values.age}
+                          onChange={(val) => setFieldValue("age", val)}
+                        />
+                      )}
+                    </FormikConsumer>
                   </Col>
                   <Col xs={24}>
                     <Space direction="horizontal" size={16}>

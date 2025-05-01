@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "../styles/PatientList.module.css";
 import { BloodPressureChart } from "./BloodPressureChart";
 import BloodPressureList from "components/elements/List/BloodPressureList";
+import { key } from "localforage";
 
 const Patient = ({
   patient,
@@ -65,42 +66,55 @@ const Patient = ({
     },
     {
       key: '7',
+      label: t("patient.label.gender"),
+      children: <p>{patient?.gender === "male" ? t("patient.label.male") : t("patient.label.female") }</p>,
+    },
+    {
+      key: '8',
+      label: t("patient.label.age"),
+      children: <p>{patient?.age}</p>,
+    },
+    {
+      key: '8',
+    },
+    {
+      key: '9',
       label: t("patient.label.createBy"),
       children: <p>{patient?.createBy ? `${patient.createBy.firstName} ${patient.createBy.lastName}` : '-'}</p>,
     },
     {
-      key: '8',
+      key: '10',
       label: t("patient.label.createDate"),
       children: <p>{formatDate(patient?.createDate)}</p>,
     },
     {
-      key: '9',
+      key: '11',
     },
     {
-      key: '10',
+      key: '12',
       label: t("patient.label.updateBy"),
       children: <p>{patient?.updateBy ? `${patient.updateBy.firstName} ${patient.updateBy.lastName}` : '-'}</p>,
     },
     {
-      key: '11',
+      key: '13',
       label: t("patient.label.updateDate"),
       children: <p>{formatDate(patient?.updateDate)}</p>,
     },
     {
-      key: '12',
+      key: '14',
     },
     {
-      key: '13',
+      key: '15',
       label: t("patient.label.status_flag"),
       children: <p>{patient?.statusFlag}</p>,
     },
     {
-      key: '14',
+      key: '16',
       label: t("patient.label.level"),
       children: <p>{patient?.level}</p>,
     },
     {
-      key: '15',
+      key: '17',
       label: t("patient.label.checkState"),
       children: <Checkbox checked={patient?.verified}
       onChange={() => onCheckboxChange(!patient?.verified, patient?.id)}

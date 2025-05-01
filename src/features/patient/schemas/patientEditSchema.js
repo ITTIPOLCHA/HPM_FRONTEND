@@ -6,6 +6,8 @@ export const initialValues = {
   email: "",
   phoneNumber: "",
   hospitalNumber: "",
+  gender: "",
+  age: 0,
 };
 
 const PatientEditSchema = Yup.object().shape({
@@ -16,6 +18,12 @@ const PatientEditSchema = Yup.object().shape({
     .matches(/^[0-9]+$/, "Phone number must contain only digits")
     .required("Phone number is required"),
   hospitalNumber: Yup.string().required("HN is required"),
+  gender: Yup.string().required("Gender is required"),
+  age: Yup.number()
+    .typeError("Age must be a number")
+    .min(1, "Age must be greater than or equal to 1")
+    .max(120, "Age must be less than or equal to 120")
+    .required("Age is required"),
 });
 
 export default PatientEditSchema;
