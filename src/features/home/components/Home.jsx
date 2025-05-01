@@ -31,22 +31,41 @@ function Home({
       title={t("home.header")}
       breadcrumb={[{ title: t("home.header") }]}
     >
-      <Row gutter={[24, 10]} style={{ width: "100%", height: "100%" }}>
-        <Col xs={24} sm={24} md={24} lg={24}>
+      <Row gutter={[24, 16]} style={{ width: "100%", height: "100%" }}>
+        <Col span={24}>
           <CardContainer width="100%" height="fit-content">
             {currentDate && (
               <>
                 <div className={styles.header}>{t("home.label.card_one")}</div>
-                <div className={styles.sub_header}>
-                  <div className={`${styles.icon_and_text_container}`}>
-                    {t("home.label.card_one_date")}
-                    <span className={`${styles.blue_text}`}>{currentDate}</span>
-                    {t("home.label.card_one_time")}
-                    <span className={`${styles.blue_text}`}>{currentTime}</span>
-                    {t("home.label.card_zero")}
-                    <span className={`${styles.blue_text}`}>
-                      {daysUntilNextMonth}
-                    </span>
+                <div
+                  className={styles.sub_header}
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <div
+                    className={`${styles.icon_and_text_container}`}
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <div style={{ display: "flex" }}>
+                      {t("home.label.card_one_date")}
+                      <span className={`${styles.blue_text}`}>
+                        {currentDate}
+                      </span>
+                    </div>
+                    <div>
+                      {t("home.label.card_one_time")}
+                      <span className={`${styles.blue_text}`}>
+                        {currentTime}
+                      </span>
+                    </div>
+                    <div>
+                      {t("home.label.card_zero")}
+                      <span className={`${styles.blue_text}`}>
+                        {daysUntilNextMonth} {t("home.unit.day")}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </>
@@ -58,7 +77,7 @@ function Home({
             )}
           </CardContainer>
         </Col>
-        <Col xs={24} sm={12} md={12} lg={6}>
+        <Col xs={24} sm={12} lg={6}>
           <CardState
             width="100%"
             height="fit-content"
@@ -69,7 +88,7 @@ function Home({
             label={t("home.label.card_two")}
           />
         </Col>
-        <Col xs={24} sm={12} md={12} lg={6}>
+        <Col xs={24} sm={12} lg={6}>
           <CardState
             width="100%"
             height="fit-content"
@@ -82,7 +101,7 @@ function Home({
             openProgress={true}
           />
         </Col>
-        <Col xs={24} sm={12} md={12} lg={6}>
+        <Col xs={24} sm={12} lg={6}>
           <CardState
             width="100%"
             height="fit-content"
@@ -95,7 +114,7 @@ function Home({
             openProgress={true}
           />
         </Col>
-        <Col xs={24} sm={12} md={12} lg={6}>
+        <Col xs={24} sm={12} lg={6}>
           <CardState
             width="100%"
             height="fit-content"
@@ -108,7 +127,7 @@ function Home({
             openProgress={true}
           />
         </Col>
-        <Col xs={24} sm={12} md={24} lg={12}>
+        <Col xs={24} sm={12}>
           <CardContainer width="100%" height="100%">
             <div className={styles.header_list}>
               <h2>{t("home.label.card_six")}</h2>
@@ -122,43 +141,40 @@ function Home({
             />
           </CardContainer>
         </Col>
-        <Col xs={24} sm={12} md={24} lg={12}>
-          <Row gutter={[24, 10]}>
+        <Col xs={24} sm={12}>
+          <Row gutter={[24, 16]}>
             <Col span={24}>
               <CardContainer width="100%" height="max-content" color="#451390">
-                {currentDate && (
-                  <div className={styles.header_mini_last}>
-                    <div
-                      className={`${styles.icon_and_text_container} ${styles.align_right}`}
-                    >
+                {currentDate ? (
+                  <Row gutter={[24, 16]} className={styles.header_mini_last}>
+                    <Col xs={24} lg={4} className={styles.font_size_main}>
                       {t("home.label.card_seven_one")}
-                      <span className={styles.right_aligned_text}>
-                        sys : {states.bloodPressureCurrent?.systolicPressure}
+                    </Col>
+                    <Col xs={24} lg={20} className={styles.font_size_main}>
+                      <span>
+                        {t("home.label.card_seven_two")}{" "}
+                        {states.bloodPressureCurrent?.createBy?.firstName}{" "}
+                        {states.bloodPressureCurrent?.createBy?.lastName}(
+                        {states.bloodPressureCurrent?.createBy?.hospitalNumber})
                       </span>
-                    </div>
-                    <div
-                      className={`${styles.icon_and_text_container} ${styles.align_right}`}
-                    >
-                      <span className={styles.right_aligned_text}>
-                        dia : {states.bloodPressureCurrent?.diastolicPressure}
+                    </Col>
+                    <Col xs={24} sm={8} className={styles.font_size_main}>
+                      <span>
+                        SYS : {states.bloodPressureCurrent?.systolicPressure}
                       </span>
-                    </div>
-                    <div
-                      className={`${styles.icon_and_text_container} ${styles.align_right}`}
-                    >
-                      {t("home.label.card_seven_two")}{" "}
-                      {states.bloodPressureCurrent?.createBy?.firstName}{" "}
-                      {states.bloodPressureCurrent?.createBy?.lastName}
-                      {" ( "}
-                      {states.bloodPressureCurrent?.createBy?.hospitalNumber}
-                      {" )"}
-                      <span className={styles.right_aligned_text}>
-                        pul : {states.bloodPressureCurrent?.pulseRate}
+                    </Col>
+                    <Col xs={24} sm={8} className={styles.font_size_main}>
+                      <span>
+                        DIA : {states.bloodPressureCurrent?.diastolicPressure}
                       </span>
-                    </div>
-                  </div>
-                )}
-                {!currentDate && (
+                    </Col>
+                    <Col xs={24} sm={8} className={styles.font_size_main}>
+                      <span>
+                        PUL : {states.bloodPressureCurrent?.pulseRate}
+                      </span>
+                    </Col>
+                  </Row>
+                ) : (
                   <div className={styles.header_mini}>
                     {t("home.label.loading")} <LoadingOutlined />
                   </div>

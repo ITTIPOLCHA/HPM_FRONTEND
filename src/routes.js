@@ -6,7 +6,7 @@ import ChangePassword from "features/authentication/pages/ChangePassword";
 import ForgotPassword from "features/authentication/pages/ForgotPassword";
 import Login from "features/authentication/pages/Login";
 import ResetPassword from "features/authentication/pages/ResetPassword";
-import SignUp from "features/authentication/pages/SignUp";
+//import SignUp from "features/authentication/pages/SignUp";
 import BloodPressureEdit from "features/bloodPressure/pages/BloodPressureEdit";
 import BloodPressureList from "features/bloodPressure/pages/BloodPressureList";
 import PatientList from "features/patient/pages/PatientList";
@@ -15,6 +15,9 @@ import PatientEdit from "features/patient/pages/PatientEdit";
 import PrivateRoute from "PrivateRoute";
 
 import NotFound from "features/notfound/pages/NotFound";
+import UserManagement from "features/userManagement/pages/UserManagement";
+import UserManagementEdit from "features/userManagement/pages/UserManagementEdit";
+import UserManagementCreate from "features/userManagement/pages/UserManagementCreate";
 
 const router = createBrowserRouter([
   {
@@ -26,10 +29,10 @@ const router = createBrowserRouter([
     path: "/sign_in",
     element: <Login />,
   },
-  {
-    path: "/sign_up",
-    element: <SignUp />,
-  },
+  // {
+  //   path: "/sign_up",
+  //   element: <SignUp />,
+  // },
   {
     path: "/forgot_password",
     element: <ForgotPassword />,
@@ -61,7 +64,19 @@ const router = createBrowserRouter([
   {
     path: "/blood_pressure/:id/edit",
     element: <PrivateRoute element={<BloodPressureEdit />} />,
-  }
+  },
+  {
+    path: "/user_management",
+    element: <PrivateRoute element={<UserManagement />} />,
+  },
+  {
+    path: "/create_user_management",
+    element: <PrivateRoute element={<UserManagementCreate />} />,
+  },
+  {
+    path: "/user_management/:id/edit",
+    element: <PrivateRoute element={<UserManagementEdit />} />,
+  },
 ]);
 
 export default router;

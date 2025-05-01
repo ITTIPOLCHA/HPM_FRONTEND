@@ -6,6 +6,7 @@ import {
   MenuOutlined,
   RightOutlined,
   UserOutlined,
+  IdcardOutlined,
 } from "@ant-design/icons";
 import {
   Alert,
@@ -47,30 +48,28 @@ const MainLayout = ({
 }) => {
   const dispatch = useDispatch();
   const { collapsed } = useSelector((state) => state.main);
-  const profile = window.localStorage.getItem("name");
   const {
     token: { borderRadiusLG },
   } = theme.useToken();
   const { t } = useTranslation();
-  const location = useLocation();
   const navigate = useNavigate();
-  const [selectedKeys, setSelectedKeys] = useState(["home"]);
-  const [openKeys, setOpenKeys] = useState(["home"]);
+  const location = useLocation();
   const screens = useBreakpoint();
 
+  const [selectedKeys, setSelectedKeys] = useState(["home"]);
+  const [openKeys, setOpenKeys] = useState(["home"]);
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   const toggleDrawer = () => setDrawerVisible(!drawerVisible);
 
   const getState = useCallback(async () => {
     try {
-      const values = {
+      const res = await services.getState({
         requestId: generateRandomString(),
-      };
-      const response = await services.getState(values);
-      dispatch(setState(response.data));
-    } catch (error) {
-      Alert({ type: "error", resultObject: error });
+      });
+      dispatch(setState(res.data));
+    } catch (err) {
+      Alert({ type: "error", resultObject: err });
     }
   }, [dispatch]);
 
@@ -90,7 +89,7 @@ const MainLayout = ({
     });
   }
 
-  useMemo(() => {
+  useEffect(() => {
     const pathname = location.pathname;
     if (pathname === "/") {
       setSelectedKeys(["home"]);
@@ -140,11 +139,17 @@ const MainLayout = ({
       "blood_pressure",
       <HeartOutlined />
     ),
+    getItem(
+      "user_management",
+      "User management",
+      "user_management",
+      <IdcardOutlined />
+    ),
   ];
 
   return (
     <>
-      {screens.lg ? (
+      {screens.xl ? (
         <Layout className={cx(styles.container, className)} hasSider={true}>
           <Sider
             width="27vh"
@@ -286,7 +291,6 @@ const MainLayout = ({
         <Layout className={cx(styles.container, className)}>
           <Content
             style={{
-              paddingLeft: 10,
               backgroundColor: "#FFFBEB",
               borderRadius: borderRadiusLG,
             }}
@@ -295,14 +299,13 @@ const MainLayout = ({
               className={styles.header_md}
               style={{
                 paddingTop: "10px",
-                paddingLeft: 0,
-                paddingRight: 0,
-                marginLeft: "8px",
+                paddingLeft: "20px",
+                paddingRight: "5px",
                 lineHeight: "20px",
                 borderRadius: borderRadiusLG,
               }}
             >
-              <Row gutter={[24, 24]}>
+              <Row gutter={[24, 10]}>
                 <Col span={12}>
                   <Row align="middle" justify="space-between">
                     <Space size="1" direction="vertical">
@@ -316,23 +319,19 @@ const MainLayout = ({
                     <Space justify="right" size={24}>
                       <Notification />
                       <User />
+                      <Button
+                        icon={<MenuOutlined />}
+                        type="text"
+                        onClick={toggleDrawer}
+                      />
                     </Space>
                   </Flex>
-                </Col>
-                <Col span={2}>
-                  <Button
-                    icon={<MenuOutlined />}
-                    type="text"
-                    onClick={toggleDrawer}
-                  />
                 </Col>
               </Row>
             </Header>
             <Content
               className={styles.content}
               style={{
-                margin: "5px 5px",
-                padding: 10,
                 height: "100%",
                 borderRadius: borderRadiusLG,
               }}
@@ -340,8 +339,12 @@ const MainLayout = ({
               <div className={styles.body}>
                 <div
                   style={{
+                    padding: 10,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
                     height: "max-content",
-                    paddingRight: "1vw",
                   }}
                 >
                   {children}
@@ -351,7 +354,7 @@ const MainLayout = ({
           </Content>
           <Drawer
             title="Menu"
-            placement="left"
+            placement="right"
             onClose={toggleDrawer}
             open={drawerVisible}
           >

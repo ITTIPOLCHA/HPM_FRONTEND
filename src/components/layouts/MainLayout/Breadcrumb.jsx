@@ -7,7 +7,12 @@ const Breadcrumb = ({ className = "", breadcrumb = [] }) => {
   const navigate = useNavigate();
 
   const handleClick = (link) => {
-    navigate("/" + link);
+    if (link === '/') {
+      navigate("/");
+    }
+    else {
+      navigate("/" + link);
+    }
   };
 
   const renderBreadcrumb = useMemo(() => {

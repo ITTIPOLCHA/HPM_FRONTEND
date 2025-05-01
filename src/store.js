@@ -7,6 +7,7 @@ import signUpReducer from "features/authentication/slices/signUpSlice";
 import bloodPressureSlice from "features/bloodPressure/slices/bloodPressureSlice";
 import homeSlice from "features/home/slices/homeSlice";
 import patientSlice from "features/patient/slices/patientSlice";
+import adminSlice from "features/userManagement/slices/adminSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     password: passwordReducer,
     main: mainReducer,
     patient: patientSlice,
+    admin: adminSlice,
     bloodPressure: bloodPressureSlice,
   },
 });

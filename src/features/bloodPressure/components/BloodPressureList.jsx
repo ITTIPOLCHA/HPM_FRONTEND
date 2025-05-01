@@ -3,11 +3,17 @@ import { Row, Space } from "antd";
 import { Button, CardContainer } from "components/elements";
 import { MainLayout } from "components/layouts";
 import BloodPressureTable from "components/table/BloodPressureTable";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import styles from "../styles/BloodPressureList.module.css";
 import FilterSection from "./BloodPressureFitter";
+
+function getResponsiveTableWidth() {
+  return window.innerWidth > 1100
+    ? "100%"
+    : `${document.documentElement.clientWidth - 26}px`;
+}
 
 const BloodPressureList = ({
   bloodPressureList = [],
@@ -15,11 +21,11 @@ const BloodPressureList = ({
   isDownloading = false,
   pagination = {},
   filter = {},
-  onDelete = () => {},
-  onChange = () => {},
-  onSubmit = () => {},
-  onClear = () => {},
-  onDownloadExcel = () => {},
+  onDelete = () => { },
+  onChange = () => { },
+  onSubmit = () => { },
+  onClear = () => { },
+  onDownloadExcel = () => { },
 }) => {
   const { t } = useTranslation();
   const [showFilterForm, setShowFilterForm] = useState(false);
@@ -29,6 +35,11 @@ const BloodPressureList = ({
   const userDropDownHn = useSelector(
     (state) => state.bloodPressure.userDropDownHn
   );
+  const [tableWidth, setTableWidth] = useState(getResponsiveTableWidth());
+
+  useEffect(() => {
+      setTableWidth(getResponsiveTableWidth());
+  }, [tableWidth]);
 
   return (
     <MainLayout
@@ -64,7 +75,7 @@ const BloodPressureList = ({
           userDropDownHn={userDropDownHn}
           initialValues={filter}
         />
-        <CardContainer width="100%" height="fit-content">
+        <CardContainer width={tableWidth} height="fit-content">
           <BloodPressureTable
             dataSource={bloodPressureList}
             onDelete={onDelete}
