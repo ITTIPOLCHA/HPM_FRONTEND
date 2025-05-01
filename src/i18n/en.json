@@ -103,7 +103,9 @@
         "updateBy": "Update By",
         "updateDate": "Update Date",
         "role": "Role",
-        "status_flag": "Status Flag"
+        "status_flag": "Status Flag",
+        "age": "Age",
+        "gender": "Gender"
       }
     },
     "sign_up": {

@@ -103,7 +103,9 @@
         "updateBy": "อัพเดทโดย",
         "updateDate": "อัพเดทวันที่",
         "role": "บทบาท",
-        "status_flag": "สถานะ"
+        "status_flag": "สถานะ",
+        "age": "อายุ",
+        "gender": "เพศ"
       }
     },
     "sign_up": {
