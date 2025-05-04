@@ -10,8 +10,7 @@
       "timespan": "{hh} {hour} {mm} {minute} {ss} {second}"
     },
     "background": {
-      "header": "Golden Jubilee Medical Center.",
-      "sub_header": "Faculty of Medicine, Siriraj Hospital, Mahidol University"
+      "header": "Blood Pressure Monitoring APP"
     },
     "unit": {
       "seconds": "seconds",

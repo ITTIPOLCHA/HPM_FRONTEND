@@ -21,8 +21,8 @@ import {
   Space,
   theme,
 } from "antd";
-import Logo2 from "assets/images/Mahidol_U.png";
-import Logo from "assets/images/pattern_MU-logo.png";
+import Logo2 from "assets/images/Logo1.png";
+import Logo from "assets/images/Logo2.jpg";
 import cx from "classnames";
 import { setState } from "features/home/slices/homeSlice";
 import { useCallback, useEffect, useMemo, useState } from "react";
