@@ -76,7 +76,26 @@ const PatientTable = ({
       width: "13%",
       sorter: (a, b) => a.firstName.localeCompare(b.firstName),
       render: (_, record) => {
-        return record.firstName + " " + record.lastName;
+        return record.firstName + " " + record.lastName ;
+      },
+    },
+    {
+      title: <div className="text-table">{t("patient.label.age")}</div>,
+      dataIndex: "age",
+      key: "age",
+      width: window.localStorage.getItem("lang") === 'th' ? "5%" : "10%",
+      sorter: (a, b) => a.age - b.age,
+      render: (_, record) => {
+        return window.localStorage.getItem("lang") === 'th' ? record.age + ' ปี' : record.age +  ' years old'
+      },
+    },{
+      title: <div className="text-table">{t("patient.label.gender")}</div>,
+      dataIndex: "gender",
+      key: "gender",
+      width: "5%",
+      sorter: (a, b) => a.gender.localeCompare(b.gender),
+      render: (_, record) => {
+        return window.localStorage.getItem("lang") === 'en' ? record.gender : record.gender === 'male' ? 'ชาย' : 'หญิง'
       },
     },
     {
